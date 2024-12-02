@@ -30,7 +30,7 @@ namespace Restaurant
                 {
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
-                    itenGrid.DataSource = dt;
+                    itemGrid.DataSource = dt;
                 }
 
             }
