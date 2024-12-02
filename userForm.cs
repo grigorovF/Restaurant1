@@ -55,74 +55,50 @@ namespace Restaurant
             try
             {
                 conn.Open();
+
                 string s1 = "SELECT * FROM userTable WHERE password = @password";
                 using (SqlCommand sqlCommand = new SqlCommand(s1, conn))
                 {
                     sqlCommand.Parameters.AddWithValue("@password", password);
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.Read())
                         {
                             currentUser = reader.GetString(0) + " " + reader.GetString(1);
                             userNameLabel.Text = currentUser;
                         }
                     }
                 }
+
                 string s2 = "SELECT Product FROM itemTable";
                 using (SqlCommand cmd2 = new SqlCommand(s2, conn))
                 {
                     using (SqlDataReader dataReader2 = cmd2.ExecuteReader())
                     {
-                        AutoCompleteStringCollection colection = new AutoCompleteStringCollection();
+                        AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
                         while (dataReader2.Read())
                         {
-                            colection.Add(dataReader2["Product"].ToString().Trim());
+                            collection.Add(dataReader2["Product"].ToString().Trim());
                         }
 
                         productNameBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-                        productNameBox.AutoCompleteCustomSource = colection;
+                        productNameBox.AutoCompleteCustomSource = collection;
                         productNameBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     }
                 }
 
-                string s3 = "SELECT TableName FROM uTable WHERE UserName = @UserName";
-                using (SqlCommand cmd3 = new SqlCommand(s3, conn))
-                {
-                    cmd3.Parameters.AddWithValue("@UserName", currentUser);
-                    using (SqlDataReader tableReader = cmd3.ExecuteReader())
-                    {
-                        while (tableReader.Read())
-                        {
-                            string tableName = tableReader["TableName"].ToString();
-                            listBox1.Items.Add(tableName);
-                            string s4 = "SELECT Product, Quantity, Price, Total FROM Orders WHERE TableName = @TableName";
-                            using (SqlCommand cmd4 = new SqlCommand(s4, conn))
-                            {
-                                cmd4.Parameters.AddWithValue("@TableName", tableName);
-                                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd4))
-                                {
-                                    DataTable orders = new DataTable();
-                                    adapter.Fill(orders);
-                                    invoiceDictionatry[tableName] = orders;
-
-                                }
-                            }
-                        }
-                    }
-                }
 
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
             }
             finally
             {
                 conn.Close();
             }
-
         }
+
 
         private void productNameBox_TextChanged(object sender, EventArgs e)
         {
@@ -161,13 +137,16 @@ namespace Restaurant
 
             if (listBox1.SelectedIndex >= 0)
             {
-                string selectedTable = listBox1.SelectedItem.ToString();
-                productNameBox.Enabled = true;
-                productQuantityBox.Enabled = true;
-
-                if (invoiceDictionatry.ContainsKey(selectedTable))
+                if (listBox1.SelectedIndex >= 0)
                 {
-                    invoiceGrid.DataSource = invoiceDictionatry[selectedTable];
+                    string selectedTable = listBox1.SelectedItem.ToString();
+                    productNameBox.Enabled = true;
+                    productQuantityBox.Enabled = true;
+
+                    if (invoiceDictionatry.ContainsKey(selectedTable))
+                    {
+                        invoiceGrid.DataSource = invoiceDictionatry[selectedTable];
+                    }
                 }
             }
         }
@@ -177,29 +156,7 @@ namespace Restaurant
             string tableName = Interaction.InputBox("Enter table name: ", "Table Name");
             if (!string.IsNullOrEmpty(tableName) && !orderDictionary.ContainsKey(tableName))
             {
-                try
-                {
-                    conn.Open();
-                    string s = "INSERT INTO uTable(UserName, TableName) VALUES (@UserName, @TableName)";
-                    using (SqlCommand sqlCommand = new SqlCommand(s, conn))
-                    {
-                        sqlCommand.Parameters.AddWithValue("@UserName", currentUser);
-                        sqlCommand.Parameters.AddWithValue("@TableName", tableName);
-                        sqlCommand.ExecuteNonQuery();
-                        listBox1.Items.Add(tableName);
-                    }
-
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error adding table!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    conn.Close();
-                }
-
+                listBox1.Items.Add(tableName);
                 if (listBox1.SelectedItem != null)
                 {
                     productNameBox.Enabled = true;
@@ -328,7 +285,7 @@ namespace Restaurant
                     productQuantityBox.Text = "";
                     priceLabel.Text = "";
 
-                    sumLabel.Text = calculateSum().ToString("F2");
+                    sumaLabel2.Text = calculateSum().ToString("F2");
 
                 }
                 catch (Exception ex)
@@ -353,10 +310,7 @@ namespace Restaurant
             return s;
         }
 
-        private void makeOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -404,7 +358,78 @@ namespace Restaurant
                 }
             }
         }
+
+        private void makeOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select a table first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedTable = listBox1.SelectedItem.ToString();
+
+            if (!orderDictionary.ContainsKey(selectedTable) || orderDictionary[selectedTable].Rows.Count == 0)
+            {
+                MessageBox.Show("No orders to save for this table.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataTable orderTable = orderDictionary[selectedTable];
+            DataTable invoiceTable;
+
+            if (!invoiceDictionatry.ContainsKey(selectedTable))
+            {
+                invoiceTable = new DataTable();
+                invoiceTable.Columns.Add("Product", typeof(string));
+                invoiceTable.Columns.Add("Quantity", typeof(int));
+                invoiceTable.Columns.Add("Price", typeof(double));
+                invoiceTable.Columns.Add("Total", typeof(double));
+                invoiceDictionatry[selectedTable] = invoiceTable;
+            }
+            else
+            {
+                invoiceTable = invoiceDictionatry[selectedTable];
+            }
+
+            foreach (DataRow orderRow in orderTable.Rows)
+            {
+                string product = orderRow["Product"].ToString();
+                int quantity = Convert.ToInt32(orderRow["Quantity"]);
+                double price = Convert.ToDouble(orderRow["Price"]);
+                double total = Convert.ToDouble(orderRow["Total"]);
+
+                bool productExists = false;
+
+                foreach (DataRow invoiceRow in invoiceTable.Rows)
+                {
+                    if (invoiceRow["Product"].ToString() == product)
+                    {
+                        int existingQuantity = Convert.ToInt32(invoiceRow["Quantity"]);
+                        invoiceRow["Quantity"] = existingQuantity + quantity;
+                        invoiceRow["Total"] = (existingQuantity + quantity) * price;
+                        productExists = true;
+                        break;
+                    }
+                }
+
+                if (!productExists)
+                {
+                    invoiceTable.Rows.Add(product, quantity, price, total);
+                }
+            }
+
+
+            orderTable.Clear();
+            orderGrid.DataSource = null;
+
+            invoiceGrid.DataSource = null;
+            invoiceGrid.DataSource = invoiceTable;
+
+            MessageBox.Show("Order saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
     }
-
-
 }
+
+
