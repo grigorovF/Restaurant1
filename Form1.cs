@@ -109,7 +109,7 @@ namespace Restaurant
                     }
                     else
                     {
-                        userForm userForm = new userForm();
+                        userForm userForm = new userForm(password);
                         userForm.Show();
                         this.Hide();
                     }

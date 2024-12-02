@@ -41,6 +41,10 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             label1 = new Label();
@@ -51,9 +55,14 @@
             Users = new Guna.UI2.WinForms.Guna2Button();
             itenGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
+            incommingNummberTextBox = new Guna.UI2.WinForms.Guna2TextBox();
+            inItemCheck = new Guna.UI2.WinForms.Guna2CheckBox();
+            inNumberCheck = new Guna.UI2.WinForms.Guna2CheckBox();
+            inItemCombo = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)itenGrid).BeginInit();
+            guna2GroupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -231,16 +240,99 @@
             // guna2GroupBox1
             // 
             guna2GroupBox1.BorderColor = Color.FromArgb(64, 64, 64);
+            guna2GroupBox1.Controls.Add(inItemCombo);
+            guna2GroupBox1.Controls.Add(incommingNummberTextBox);
+            guna2GroupBox1.Controls.Add(inItemCheck);
+            guna2GroupBox1.Controls.Add(inNumberCheck);
             guna2GroupBox1.CustomBorderColor = Color.Goldenrod;
-            guna2GroupBox1.CustomizableEdges = customizableEdges9;
+            guna2GroupBox1.CustomizableEdges = customizableEdges13;
             guna2GroupBox1.Font = new Font("Segoe UI", 14.2641506F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             guna2GroupBox1.ForeColor = Color.Navy;
             guna2GroupBox1.Location = new Point(12, 220);
             guna2GroupBox1.Name = "guna2GroupBox1";
-            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2GroupBox1.Size = new Size(265, 389);
+            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2GroupBox1.Size = new Size(265, 296);
             guna2GroupBox1.TabIndex = 6;
             guna2GroupBox1.Text = "Group by";
+            // 
+            // incommingNummberTextBox
+            // 
+            incommingNummberTextBox.CustomizableEdges = customizableEdges11;
+            incommingNummberTextBox.DefaultText = "";
+            incommingNummberTextBox.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            incommingNummberTextBox.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            incommingNummberTextBox.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            incommingNummberTextBox.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            incommingNummberTextBox.Enabled = false;
+            incommingNummberTextBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            incommingNummberTextBox.Font = new Font("Segoe UI", 9F);
+            incommingNummberTextBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            incommingNummberTextBox.Location = new Point(18, 103);
+            incommingNummberTextBox.Name = "incommingNummberTextBox";
+            incommingNummberTextBox.PasswordChar = '\0';
+            incommingNummberTextBox.PlaceholderText = "";
+            incommingNummberTextBox.SelectedText = "";
+            incommingNummberTextBox.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            incommingNummberTextBox.Size = new Size(221, 36);
+            incommingNummberTextBox.TabIndex = 2;
+            // 
+            // inItemCheck
+            // 
+            inItemCheck.AutoSize = true;
+            inItemCheck.BackColor = Color.White;
+            inItemCheck.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            inItemCheck.CheckedState.BorderRadius = 0;
+            inItemCheck.CheckedState.BorderThickness = 0;
+            inItemCheck.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            inItemCheck.Location = new Point(18, 180);
+            inItemCheck.Name = "inItemCheck";
+            inItemCheck.Size = new Size(77, 34);
+            inItemCheck.TabIndex = 1;
+            inItemCheck.Text = "Item";
+            inItemCheck.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            inItemCheck.UncheckedState.BorderRadius = 0;
+            inItemCheck.UncheckedState.BorderThickness = 0;
+            inItemCheck.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            inItemCheck.UseVisualStyleBackColor = false;
+            // 
+            // inNumberCheck
+            // 
+            inNumberCheck.AutoSize = true;
+            inNumberCheck.BackColor = Color.White;
+            inNumberCheck.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            inNumberCheck.CheckedState.BorderRadius = 0;
+            inNumberCheck.CheckedState.BorderThickness = 0;
+            inNumberCheck.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            inNumberCheck.Location = new Point(18, 54);
+            inNumberCheck.Name = "inNumberCheck";
+            inNumberCheck.Size = new Size(103, 34);
+            inNumberCheck.TabIndex = 0;
+            inNumberCheck.Text = "Invoice";
+            inNumberCheck.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            inNumberCheck.UncheckedState.BorderRadius = 0;
+            inNumberCheck.UncheckedState.BorderThickness = 0;
+            inNumberCheck.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            inNumberCheck.UseVisualStyleBackColor = false;
+            inNumberCheck.CheckedChanged += inNumberCheck_CheckedChanged;
+            // 
+            // inItemCombo
+            // 
+            inItemCombo.BackColor = Color.Transparent;
+            inItemCombo.CustomizableEdges = customizableEdges9;
+            inItemCombo.DrawMode = DrawMode.OwnerDrawFixed;
+            inItemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            inItemCombo.Enabled = false;
+            inItemCombo.FocusedColor = Color.FromArgb(94, 148, 255);
+            inItemCombo.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            inItemCombo.Font = new Font("Segoe UI", 10F);
+            inItemCombo.ForeColor = Color.FromArgb(68, 88, 112);
+            inItemCombo.ItemHeight = 30;
+            inItemCombo.Location = new Point(18, 220);
+            inItemCombo.Name = "inItemCombo";
+            inItemCombo.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            inItemCombo.Size = new Size(221, 36);
+            inItemCombo.TabIndex = 3;
+            inItemCombo.SelectedIndexChanged += inItemCombo_SelectedIndexChanged;
             // 
             // ownerForm
             // 
@@ -264,6 +356,8 @@
             guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)itenGrid).EndInit();
+            guna2GroupBox1.ResumeLayout(false);
+            guna2GroupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -277,5 +371,9 @@
         private Guna.UI2.WinForms.Guna2Button Users;
         private Guna.UI2.WinForms.Guna2DataGridView itenGrid;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
+        private Guna.UI2.WinForms.Guna2TextBox incommingNummberTextBox;
+        private Guna.UI2.WinForms.Guna2CheckBox inItemCheck;
+        private Guna.UI2.WinForms.Guna2CheckBox inNumberCheck;
+        private Guna.UI2.WinForms.Guna2ComboBox inItemCombo;
     }
 }

@@ -21,7 +21,8 @@ namespace Restaurant
             InitializeComponent();
         }
 
-        private void itemGridDefault() {
+        private void itemGridDefault()
+        {
             string s = "SELECT * FROM itemTable";
             using (SqlCommand cmd = new SqlCommand(s, conn))
             {
@@ -32,7 +33,7 @@ namespace Restaurant
                     itenGrid.DataSource = dt;
                 }
 
-            }      
+            }
         }
 
         private void ownerForm_Load(object sender, EventArgs e)
@@ -53,7 +54,7 @@ namespace Restaurant
                     }
                 }
                 itemGridDefault();
-                
+
             }
             catch (Exception ex)
             {
@@ -80,6 +81,59 @@ namespace Restaurant
             {
 
             }
+        }
+
+        private void inNumberCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (inNumberCheck.Checked == true)
+            {
+                incommingNummberTextBox.Enabled = true;
+                try
+                {
+                    conn.Open();
+                    string select = "SELECT * FROM InboundInvoices";
+                    using (SqlCommand cmd = new SqlCommand(select, conn)) {
+                        using (SqlDataReader reader = cmd.ExecuteReader()) {
+                            while (reader.Read()) {
+                                inItemCombo.Items.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
+            else
+            {
+                incommingNummberTextBox.Enabled = false;
+                incommingNummberTextBox.Text = null;
+                try {
+                    conn.Open();
+                    itemGridDefault();
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void inItemCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
