@@ -70,7 +70,7 @@ namespace Restaurant
                     }
                 }
 
-               
+
                 string s2 = "SELECT Product FROM itemTable";
                 using (SqlCommand cmd2 = new SqlCommand(s2, conn))
                 {
@@ -455,7 +455,7 @@ namespace Restaurant
                         insert2.ExecuteNonQuery();
                     }
                 }
-                
+
             }
 
             catch (Exception ex)
@@ -472,7 +472,8 @@ namespace Restaurant
 
         }
 
-        private string getNummber() {
+        private string getNummber()
+        {
             HashSet<int> list = new HashSet<int>();
             Random random = new Random();
 
@@ -487,6 +488,27 @@ namespace Restaurant
             return num.ToString();
         }
 
+        private void totalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please select a table first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedTable = listBox1.SelectedItem.ToString();
+
+            if (!invoiceDictionatry.ContainsKey(selectedTable) || invoiceDictionatry[selectedTable].Rows.Count == 0)
+            {
+                MessageBox.Show("No orders for this table.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DataTable invoioceTable = invoiceDictionatry[selectedTable];
+            invoiceForm invoiceForm = new invoiceForm(invoioceTable);
+            invoiceForm.ShowDialog();
+
+        }
     }
 }
 

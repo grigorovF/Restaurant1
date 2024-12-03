@@ -165,12 +165,12 @@
             contextMenuStrip1.ImageScalingSize = new Size(18, 18);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { makeOrderToolStripMenuItem, makeInvoiceToolStripMenuItem, deleteToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(153, 70);
+            contextMenuStrip1.Size = new Size(193, 94);
             // 
             // makeOrderToolStripMenuItem
             // 
             makeOrderToolStripMenuItem.Name = "makeOrderToolStripMenuItem";
-            makeOrderToolStripMenuItem.Size = new Size(152, 22);
+            makeOrderToolStripMenuItem.Size = new Size(192, 22);
             makeOrderToolStripMenuItem.Text = "Make Order";
             makeOrderToolStripMenuItem.Click += makeOrderToolStripMenuItem_Click;
             // 
@@ -178,25 +178,26 @@
             // 
             makeInvoiceToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { separatelyToolStripMenuItem, totalToolStripMenuItem });
             makeInvoiceToolStripMenuItem.Name = "makeInvoiceToolStripMenuItem";
-            makeInvoiceToolStripMenuItem.Size = new Size(152, 22);
+            makeInvoiceToolStripMenuItem.Size = new Size(192, 22);
             makeInvoiceToolStripMenuItem.Text = "Make Invoice";
             // 
             // separatelyToolStripMenuItem
             // 
             separatelyToolStripMenuItem.Name = "separatelyToolStripMenuItem";
-            separatelyToolStripMenuItem.Size = new Size(143, 24);
+            separatelyToolStripMenuItem.Size = new Size(198, 24);
             separatelyToolStripMenuItem.Text = "Separately";
             // 
             // totalToolStripMenuItem
             // 
             totalToolStripMenuItem.Name = "totalToolStripMenuItem";
-            totalToolStripMenuItem.Size = new Size(143, 24);
+            totalToolStripMenuItem.Size = new Size(198, 24);
             totalToolStripMenuItem.Text = "Total";
+            totalToolStripMenuItem.Click += totalToolStripMenuItem_Click;
             // 
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(152, 22);
+            deleteToolStripMenuItem.Size = new Size(192, 22);
             deleteToolStripMenuItem.Text = "Delete";
             // 
             // listBox1

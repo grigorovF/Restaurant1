@@ -200,6 +200,7 @@
             Controls.Add(guna2Panel1);
             Name = "ordersForm";
             Text = "Orders";
+            FormClosing += ordersForm_FormClosing;
             Load += ordersForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             guna2Panel1.ResumeLayout(false);

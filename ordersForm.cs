@@ -20,7 +20,7 @@ namespace Restaurant
         {
             InitializeComponent();
         }
-      
+
         private void ordersForm_Load(object sender, EventArgs e)
         {
             try
@@ -59,13 +59,19 @@ namespace Restaurant
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form1 form = new Form1();
-            form.ShowDialog();
+            var res = MessageBox.Show("Do you really want to close?", "Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                this.Hide();
+                Form1 startForm = new Form1();
+                startForm.Show();
+            }
+ 
         }
 
         private void tableListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            conn.Close();
             if (tableListBox.SelectedIndex >= 0)
             {
                 guna2Button1.Enabled = true;
@@ -99,16 +105,18 @@ namespace Restaurant
             else
             {
                 guna2Button1.Enabled = false;
-               
+
             }
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             var input = MessageBox.Show("Are you realy done with this order?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (input == DialogResult.Yes) {
-                    try{
-                        conn.Open();
+            if (input == DialogResult.Yes)
+            {
+                try
+                {
+                    conn.Open();
                     if (orderGridView.SelectedRows.Count > 0)
                     {
                         string s1 = "DELETE FROM Orders WHERE OrderID = @orderID AND TableName = @TableName";
@@ -130,18 +138,33 @@ namespace Restaurant
                     }
                     orderGridView.DataSource = null;
                     tableListBox.Items.Remove(tableListBox.SelectedItem);
-                    }
-                    catch (Exception ex)
-                    {
+                }
+                catch (Exception ex)
+                {
 
-                        MessageBox.Show(ex.Message, "Error6", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        conn.Close();
-                    }
+                    MessageBox.Show(ex.Message, "Error6", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
-            
+
+        }
+
+        private void ordersForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var res = MessageBox.Show("Do you really want to close?", "Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                this.Hide();
+                Form1 startForm = new Form1();
+                startForm.Show();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
