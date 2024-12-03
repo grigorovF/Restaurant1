@@ -70,6 +70,7 @@ namespace Restaurant
                     }
                 }
 
+               
                 string s2 = "SELECT Product FROM itemTable";
                 using (SqlCommand cmd2 = new SqlCommand(s2, conn))
                 {
@@ -86,7 +87,48 @@ namespace Restaurant
                         productNameBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     }
                 }
+                string s3 = "SELECT DISTINCT TableName FROM Tables WHERE UserID = @UserID";
+                using (SqlCommand cmd3 = new SqlCommand(s3, conn))
+                {
+                    cmd3.Parameters.AddWithValue("@UserID", currentUser);
+                    using (SqlDataReader reader = cmd3.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string tableName = reader["TableName"].ToString();
+                            listBox1.Items.Add(tableName);
+                            DataTable invoiceTable = new DataTable();
+                            invoiceTable.Columns.Add("Product", typeof(string));
+                            invoiceTable.Columns.Add("Quantity", typeof(int));
+                            invoiceTable.Columns.Add("Price", typeof(double));
+                            invoiceTable.Columns.Add("Total", typeof(double));
 
+                            invoiceDictionatry[tableName] = invoiceTable;
+                        }
+                    }
+                }
+                string s4 = "SELECT TableName, Product, Quantity, Price, Total FROM Tables WHERE UserID = @UserID";
+                using (SqlCommand cmd4 = new SqlCommand(s4, conn))
+                {
+                    cmd4.Parameters.AddWithValue("@UserID", currentUser);
+                    using (SqlDataReader reader = cmd4.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string tableName = reader["TableName"].ToString();
+                            string product = reader["Product"].ToString();
+                            int quantity = Convert.ToInt32(reader["Quantity"]);
+                            double price = Convert.ToDouble(reader["Price"]);
+                            double total = Convert.ToDouble(reader["Total"]);
+
+                            // Add data to the corresponding table in the dictionary
+                            if (invoiceDictionatry.ContainsKey(tableName))
+                            {
+                                invoiceDictionatry[tableName].Rows.Add(product, quantity, price, total);
+                            }
+                        }
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -389,7 +431,8 @@ namespace Restaurant
                     string s1 = @"INSERT INTO Tables (TableName, Product, Quantity, Price, Total, UserID)
                                   VALUES (@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
 
-                    using (SqlCommand insert = new SqlCommand(s1, conn)) {
+                    using (SqlCommand insert = new SqlCommand(s1, conn))
+                    {
                         insert.Parameters.AddWithValue("@TableName", selectedTable);
                         insert.Parameters.AddWithValue("@Product", product);
                         insert.Parameters.AddWithValue("@Quantity", quantity);
@@ -398,9 +441,21 @@ namespace Restaurant
                         insert.Parameters.AddWithValue("@UserID", currentUser);
                         insert.ExecuteNonQuery();
                     }
+
+                    string s2 = @"INSERT INTO Orders (OrderID, TableName, Product, Quantity, UserID)
+                                  VALUES (@OrderID, @TableName, @Product, @Quantity, @UserID)";
+
+                    using (SqlCommand insert2 = new SqlCommand(s2, conn))
+                    {
+                        insert2.Parameters.AddWithValue("@OrderID", getNummber());
+                        insert2.Parameters.AddWithValue("@TableName", selectedTable);
+                        insert2.Parameters.AddWithValue("@Product", product);
+                        insert2.Parameters.AddWithValue("@Quantity", quantity);
+                        insert2.Parameters.AddWithValue("@UserID", currentUser);
+                        insert2.ExecuteNonQuery();
+                    }
                 }
-                orderTable.Clear();
-                orderGrid.DataSource = null;
+                
             }
 
             catch (Exception ex)
@@ -411,15 +466,25 @@ namespace Restaurant
             {
                 conn.Close();
             }
-            /*ordersForm of = new ordersForm(orderDictionary, listBox1.SelectedItem.ToString());
 
-            
+            orderTable.Clear();
             orderGrid.DataSource = null;
 
-            invoiceGrid.DataSource = null;
-            invoiceGrid.DataSource = invoiceTable;
-            */
+        }
 
+        private string getNummber() {
+            HashSet<int> list = new HashSet<int>();
+            Random random = new Random();
+
+            int num;
+
+            do
+            {
+                num = random.Next(0, 100000000);
+            }
+            while (list.Contains(num));
+
+            return num.ToString();
         }
 
     }

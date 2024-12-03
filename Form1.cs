@@ -107,6 +107,11 @@ namespace Restaurant
                         ownerForm.Show();
                         this.Hide();
                     }
+                    else if (password == "0000") {
+                        ordersForm ordersForm = new ordersForm();
+                        ordersForm.Show();
+                        this.Hide();
+                    }
                     else
                     {
                         userForm userForm = new userForm(password);

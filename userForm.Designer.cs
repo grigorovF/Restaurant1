@@ -48,6 +48,12 @@
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             userNameLabel = new Label();
             invoiceGrid = new Guna.UI2.WinForms.Guna2DataGridView();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            makeOrderToolStripMenuItem = new ToolStripMenuItem();
+            makeInvoiceToolStripMenuItem = new ToolStripMenuItem();
+            separatelyToolStripMenuItem = new ToolStripMenuItem();
+            totalToolStripMenuItem = new ToolStripMenuItem();
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             listBox1 = new ListBox();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -60,18 +66,12 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             sumaLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            makeOrderToolStripMenuItem = new ToolStripMenuItem();
-            makeInvoiceToolStripMenuItem = new ToolStripMenuItem();
-            separatelyToolStripMenuItem = new ToolStripMenuItem();
-            totalToolStripMenuItem = new ToolStripMenuItem();
-            deleteToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)invoiceGrid).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)orderGrid).BeginInit();
             tableLayoutPanel1.SuspendLayout();
-            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -122,12 +122,13 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             invoiceGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             invoiceGrid.ColumnHeadersHeight = 30;
+            invoiceGrid.ContextMenuStrip = contextMenuStrip1;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 10.18868F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 12.18868F, FontStyle.Bold | FontStyle.Italic);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.DodgerBlue;
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             invoiceGrid.DefaultCellStyle = dataGridViewCellStyle3;
             invoiceGrid.GridColor = Color.FromArgb(231, 229, 255);
@@ -159,15 +160,56 @@
             invoiceGrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             invoiceGrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(18, 18);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { makeOrderToolStripMenuItem, makeInvoiceToolStripMenuItem, deleteToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(153, 70);
+            // 
+            // makeOrderToolStripMenuItem
+            // 
+            makeOrderToolStripMenuItem.Name = "makeOrderToolStripMenuItem";
+            makeOrderToolStripMenuItem.Size = new Size(152, 22);
+            makeOrderToolStripMenuItem.Text = "Make Order";
+            makeOrderToolStripMenuItem.Click += makeOrderToolStripMenuItem_Click;
+            // 
+            // makeInvoiceToolStripMenuItem
+            // 
+            makeInvoiceToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { separatelyToolStripMenuItem, totalToolStripMenuItem });
+            makeInvoiceToolStripMenuItem.Name = "makeInvoiceToolStripMenuItem";
+            makeInvoiceToolStripMenuItem.Size = new Size(152, 22);
+            makeInvoiceToolStripMenuItem.Text = "Make Invoice";
+            // 
+            // separatelyToolStripMenuItem
+            // 
+            separatelyToolStripMenuItem.Name = "separatelyToolStripMenuItem";
+            separatelyToolStripMenuItem.Size = new Size(143, 24);
+            separatelyToolStripMenuItem.Text = "Separately";
+            // 
+            // totalToolStripMenuItem
+            // 
+            totalToolStripMenuItem.Name = "totalToolStripMenuItem";
+            totalToolStripMenuItem.Size = new Size(143, 24);
+            totalToolStripMenuItem.Text = "Total";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(152, 22);
+            deleteToolStripMenuItem.Text = "Delete";
+            // 
             // listBox1
             // 
             listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            listBox1.ContextMenuStrip = contextMenuStrip1;
+            listBox1.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold, GraphicsUnit.Point, 0);
             listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 17;
+            listBox1.ItemHeight = 21;
             listBox1.Location = new Point(819, 179);
             listBox1.MinimumSize = new Size(245, 276);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(245, 276);
+            listBox1.Size = new Size(245, 256);
             listBox1.TabIndex = 4;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
@@ -366,45 +408,6 @@
             guna2HtmlLabel4.Text = "Total:";
             guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.ImageScalingSize = new Size(18, 18);
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { makeOrderToolStripMenuItem, makeInvoiceToolStripMenuItem, deleteToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(153, 70);
-            // 
-            // makeOrderToolStripMenuItem
-            // 
-            makeOrderToolStripMenuItem.Name = "makeOrderToolStripMenuItem";
-            makeOrderToolStripMenuItem.Size = new Size(152, 22);
-            makeOrderToolStripMenuItem.Text = "Make Order";
-            makeOrderToolStripMenuItem.Click += makeOrderToolStripMenuItem_Click;
-            // 
-            // makeInvoiceToolStripMenuItem
-            // 
-            makeInvoiceToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { separatelyToolStripMenuItem, totalToolStripMenuItem });
-            makeInvoiceToolStripMenuItem.Name = "makeInvoiceToolStripMenuItem";
-            makeInvoiceToolStripMenuItem.Size = new Size(152, 22);
-            makeInvoiceToolStripMenuItem.Text = "Make Invoice";
-            // 
-            // separatelyToolStripMenuItem
-            // 
-            separatelyToolStripMenuItem.Name = "separatelyToolStripMenuItem";
-            separatelyToolStripMenuItem.Size = new Size(143, 24);
-            separatelyToolStripMenuItem.Text = "Separately";
-            // 
-            // totalToolStripMenuItem
-            // 
-            totalToolStripMenuItem.Name = "totalToolStripMenuItem";
-            totalToolStripMenuItem.Size = new Size(143, 24);
-            totalToolStripMenuItem.Text = "Total";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(152, 22);
-            deleteToolStripMenuItem.Text = "Delete";
-            // 
             // userForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -431,10 +434,10 @@
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)invoiceGrid).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)orderGrid).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
-            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
