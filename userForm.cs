@@ -376,57 +376,50 @@ namespace Restaurant
             }
 
             DataTable orderTable = orderDictionary[selectedTable];
-            DataTable invoiceTable;
-
-            if (!invoiceDictionatry.ContainsKey(selectedTable))
+            try
             {
-                invoiceTable = new DataTable();
-                invoiceTable.Columns.Add("Product", typeof(string));
-                invoiceTable.Columns.Add("Quantity", typeof(int));
-                invoiceTable.Columns.Add("Price", typeof(double));
-                invoiceTable.Columns.Add("Total", typeof(double));
-                invoiceDictionatry[selectedTable] = invoiceTable;
-            }
-            else
-            {
-                invoiceTable = invoiceDictionatry[selectedTable];
-            }
-
-            foreach (DataRow orderRow in orderTable.Rows)
-            {
-                string product = orderRow["Product"].ToString();
-                int quantity = Convert.ToInt32(orderRow["Quantity"]);
-                double price = Convert.ToDouble(orderRow["Price"]);
-                double total = Convert.ToDouble(orderRow["Total"]);
-
-                bool productExists = false;
-
-                foreach (DataRow invoiceRow in invoiceTable.Rows)
+                conn.Open();
+                foreach (DataRow row in orderTable.Rows)
                 {
-                    if (invoiceRow["Product"].ToString() == product)
-                    {
-                        int existingQuantity = Convert.ToInt32(invoiceRow["Quantity"]);
-                        invoiceRow["Quantity"] = existingQuantity + quantity;
-                        invoiceRow["Total"] = (existingQuantity + quantity) * price;
-                        productExists = true;
-                        break;
+                    string product = row["Product"].ToString();
+                    int quantity = Convert.ToInt32(row["Quantity"]);
+                    double price = Convert.ToDouble(row["Price"]);
+                    double total = Convert.ToDouble(row["Total"]);
+
+                    string s1 = @"INSERT INTO Tables (TableName, Product, Quantity, Price, Total, UserID)
+                                  VALUES (@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
+
+                    using (SqlCommand insert = new SqlCommand(s1, conn)) {
+                        insert.Parameters.AddWithValue("@TableName", selectedTable);
+                        insert.Parameters.AddWithValue("@Product", product);
+                        insert.Parameters.AddWithValue("@Quantity", quantity);
+                        insert.Parameters.AddWithValue("@Price", price);
+                        insert.Parameters.AddWithValue("@Total", total);
+                        insert.Parameters.AddWithValue("@UserID", currentUser);
+                        insert.ExecuteNonQuery();
                     }
                 }
-
-                if (!productExists)
-                {
-                    invoiceTable.Rows.Add(product, quantity, price, total);
-                }
+                orderTable.Clear();
+                orderGrid.DataSource = null;
             }
 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error Saving Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            /*ordersForm of = new ordersForm(orderDictionary, listBox1.SelectedItem.ToString());
 
-            orderTable.Clear();
+            
             orderGrid.DataSource = null;
 
             invoiceGrid.DataSource = null;
             invoiceGrid.DataSource = invoiceTable;
+            */
 
-            MessageBox.Show("Order saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
     }

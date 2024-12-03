@@ -298,11 +298,11 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             orderGrid.DefaultCellStyle = dataGridViewCellStyle6;
             orderGrid.GridColor = Color.FromArgb(231, 229, 255);
-            orderGrid.Location = new Point(41, 345);
+            orderGrid.Location = new Point(58, 354);
             orderGrid.Name = "orderGrid";
             orderGrid.RowHeadersVisible = false;
             orderGrid.RowHeadersWidth = 45;
-            orderGrid.Size = new Size(805, 166);
+            orderGrid.Size = new Size(648, 166);
             orderGrid.TabIndex = 12;
             orderGrid.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             orderGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -325,6 +325,7 @@
             orderGrid.ThemeStyle.RowsStyle.Height = 27;
             orderGrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             orderGrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            orderGrid.Visible = false;
             // 
             // tableLayoutPanel1
             // 
