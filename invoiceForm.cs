@@ -39,6 +39,7 @@ namespace Restaurant
 
         private void invoiceForm_Load(object sender, EventArgs e)
         {
+            this.AutoScroll = true;
             Guna2HtmlLabel cafe = new Guna2HtmlLabel
             {
                 Text = "My Cafe",
@@ -120,17 +121,61 @@ namespace Restaurant
             this.Controls.Add(headerTotal);
 
 
-
+            int yoffset = 0;
             foreach (DataRow row in invoiceTable.Select()) {
                 string product = row[0].ToString();
-                string price = row[1].ToString();
-                string quantity = row[2].ToString();
+                string quantity = row[1].ToString();
+                string price = row[2].ToString();
                 string total = row[3].ToString();
-                
 
-                //continue here
+                int y = 140 + yoffset;
+
+                Guna2HtmlLabel productLabel = new Guna2HtmlLabel
+                {
+                    Text = product,
+                    Location = new Point(15, y),
+                    AutoSize = false,
+                    Size = new Size(100, 35),
+                    MinimumSize = new Size(100, 0),
+                    AutoSizeHeightOnly = true,
+                    Font = new Font(Font.FontFamily, 10)
+                };
+                this.Controls.Add(productLabel);
+
+                Guna2HtmlLabel quantityLabel = new Guna2HtmlLabel
+                {
+                    Text = quantity,
+                    Location = new Point(135, y),
+                    AutoSize = true,
+                    Font = new Font(Font.FontFamily, 10)
+                };
+                this.Controls.Add(quantityLabel);
+
+                Guna2HtmlLabel priceLabel = new Guna2HtmlLabel
+                {
+                    Text = price,
+                    Location = new Point(245, y),
+                    AutoSize = true,
+                    Font = new Font(Font.FontFamily, 10),
+                    TextAlignment = ContentAlignment.MiddleRight 
+                };
+                this.Controls.Add(priceLabel);
+
+                Guna2HtmlLabel totalLabel = new Guna2HtmlLabel
+                {
+                    Text = total,
+                    Location = new Point(335, y),
+                    AutoSize = true,
+                    Font = new Font(Font.FontFamily, 10),
+                    TextAlignment = ContentAlignment.MiddleRight
+                };
+                this.Controls.Add(totalLabel);
+
+                yoffset += 40;
+
+
             }
-
+            //total label and adding
 
         }
 
