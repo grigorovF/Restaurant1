@@ -39,7 +39,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             pictureBox1 = new PictureBox();
-            userNameLabel = new Label();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             tableListBox = new ListBox();
             orderGridView = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -53,36 +52,25 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(17, 13);
+            pictureBox1.Location = new Point(19, 15);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(110, 94);
+            pictureBox1.Size = new Size(126, 111);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
-            // 
-            // userNameLabel
-            // 
-            userNameLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            userNameLabel.AutoSize = true;
-            userNameLabel.Font = new Font("Segoe UI", 21.73585F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            userNameLabel.ForeColor = Color.Black;
-            userNameLabel.Location = new Point(142, 57);
-            userNameLabel.Name = "userNameLabel";
-            userNameLabel.Size = new Size(112, 45);
-            userNameLabel.TabIndex = 0;
-            userNameLabel.Text = "owner";
             // 
             // guna2Panel1
             // 
             guna2Panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2Panel1.BackColor = Color.Goldenrod;
             guna2Panel1.Controls.Add(pictureBox1);
-            guna2Panel1.Controls.Add(userNameLabel);
             guna2Panel1.CustomizableEdges = customizableEdges1;
-            guna2Panel1.Location = new Point(-5, -3);
+            guna2Panel1.Location = new Point(-6, -4);
+            guna2Panel1.Margin = new Padding(3, 4, 3, 4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel1.Size = new Size(1129, 123);
+            guna2Panel1.Size = new Size(1290, 145);
             guna2Panel1.TabIndex = 3;
             // 
             // tableListBox
@@ -91,9 +79,10 @@
             tableListBox.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tableListBox.FormattingEnabled = true;
             tableListBox.ItemHeight = 21;
-            tableListBox.Location = new Point(12, 126);
+            tableListBox.Location = new Point(14, 148);
+            tableListBox.Margin = new Padding(3, 4, 3, 4);
             tableListBox.Name = "tableListBox";
-            tableListBox.Size = new Size(237, 298);
+            tableListBox.Size = new Size(270, 340);
             tableListBox.TabIndex = 4;
             tableListBox.SelectedIndexChanged += tableListBox_SelectedIndexChanged;
             // 
@@ -120,11 +109,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             orderGridView.DefaultCellStyle = dataGridViewCellStyle3;
             orderGridView.GridColor = Color.FromArgb(231, 229, 255);
-            orderGridView.Location = new Point(270, 126);
+            orderGridView.Location = new Point(309, 148);
+            orderGridView.Margin = new Padding(3, 4, 3, 4);
             orderGridView.Name = "orderGridView";
             orderGridView.RowHeadersVisible = false;
             orderGridView.RowHeadersWidth = 45;
-            orderGridView.Size = new Size(836, 468);
+            orderGridView.RowTemplate.Height = 27;
+            orderGridView.Size = new Size(955, 551);
             orderGridView.TabIndex = 5;
             orderGridView.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             orderGridView.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -160,10 +151,11 @@
             guna2Button1.FillColor = Color.WhiteSmoke;
             guna2Button1.Font = new Font("Segoe UI", 14.2641506F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button1.ForeColor = Color.Black;
-            guna2Button1.Location = new Point(270, 614);
+            guna2Button1.Location = new Point(309, 722);
+            guna2Button1.Margin = new Padding(3, 4, 3, 4);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button1.Size = new Size(199, 50);
+            guna2Button1.Size = new Size(227, 59);
             guna2Button1.TabIndex = 6;
             guna2Button1.Text = "Done";
             guna2Button1.Click += guna2Button1_Click;
@@ -179,32 +171,33 @@
             guna2Button2.FillColor = Color.WhiteSmoke;
             guna2Button2.Font = new Font("Segoe UI", 14.2641506F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2Button2.ForeColor = Color.Black;
-            guna2Button2.Location = new Point(907, 614);
+            guna2Button2.Location = new Point(1037, 722);
+            guna2Button2.Margin = new Padding(3, 4, 3, 4);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button2.Size = new Size(199, 50);
+            guna2Button2.Size = new Size(227, 59);
             guna2Button2.TabIndex = 7;
             guna2Button2.Text = "Back";
             guna2Button2.Click += guna2Button2_Click;
             // 
             // ordersForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
-            ClientSize = new Size(1118, 676);
+            ClientSize = new Size(1278, 795);
             Controls.Add(guna2Button2);
             Controls.Add(guna2Button1);
             Controls.Add(orderGridView);
             Controls.Add(tableListBox);
             Controls.Add(guna2Panel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ordersForm";
             Text = "Orders";
             FormClosing += ordersForm_FormClosing;
             Load += ordersForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             guna2Panel1.ResumeLayout(false);
-            guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)orderGridView).EndInit();
             ResumeLayout(false);
         }
@@ -212,7 +205,6 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Label userNameLabel;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private ListBox tableListBox;
         private Guna.UI2.WinForms.Guna2DataGridView orderGridView;

@@ -15,10 +15,10 @@ namespace Restaurant
     public partial class ordersForm : Form
     {
         SqlConnection conn = new SqlConnection("Data Source=Grigorov\\SQLEXPRESS;Initial Catalog=restaurantManagment;Integrated Security=True;Encrypt=False;MultipleActiveResultSets=True");
-
+        
         public ordersForm()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
         private void ordersForm_Load(object sender, EventArgs e)
