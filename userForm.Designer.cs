@@ -52,7 +52,6 @@
             makeInvoiceToolStripMenuItem = new ToolStripMenuItem();
             separatelyToolStripMenuItem = new ToolStripMenuItem();
             totalToolStripMenuItem = new ToolStripMenuItem();
-            deleteToolStripMenuItem = new ToolStripMenuItem();
             listBox1 = new ListBox();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -66,20 +65,24 @@
             sumaLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             invoiceGrid = new Guna.UI2.WinForms.Guna2DataGridView();
+            contextMenuStrip2 = new ContextMenuStrip(components);
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             guna2Panel1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)orderGrid).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)invoiceGrid).BeginInit();
+            contextMenuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(17, 13);
+            pictureBox1.Location = new Point(19, 15);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(110, 94);
+            pictureBox1.Size = new Size(126, 111);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
@@ -91,10 +94,11 @@
             guna2Panel1.Controls.Add(pictureBox1);
             guna2Panel1.Controls.Add(userNameLabel);
             guna2Panel1.CustomizableEdges = customizableEdges1;
-            guna2Panel1.Location = new Point(-8, -1);
+            guna2Panel1.Location = new Point(-9, -1);
+            guna2Panel1.Margin = new Padding(3, 4, 3, 4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel1.Size = new Size(1094, 117);
+            guna2Panel1.Size = new Size(1250, 138);
             guna2Panel1.TabIndex = 2;
             // 
             // userNameLabel
@@ -103,7 +107,7 @@
             userNameLabel.AutoSize = true;
             userNameLabel.Font = new Font("Segoe UI", 21.73585F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             userNameLabel.ForeColor = Color.Black;
-            userNameLabel.Location = new Point(142, 46);
+            userNameLabel.Location = new Point(162, 54);
             userNameLabel.Name = "userNameLabel";
             userNameLabel.Size = new Size(112, 45);
             userNameLabel.TabIndex = 0;
@@ -112,14 +116,14 @@
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(18, 18);
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { makeOrderToolStripMenuItem, makeInvoiceToolStripMenuItem, deleteToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { makeOrderToolStripMenuItem, makeInvoiceToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(193, 94);
+            contextMenuStrip1.Size = new Size(166, 52);
             // 
             // makeOrderToolStripMenuItem
             // 
             makeOrderToolStripMenuItem.Name = "makeOrderToolStripMenuItem";
-            makeOrderToolStripMenuItem.Size = new Size(192, 22);
+            makeOrderToolStripMenuItem.Size = new Size(165, 24);
             makeOrderToolStripMenuItem.Text = "Make Order";
             makeOrderToolStripMenuItem.Click += makeOrderToolStripMenuItem_Click;
             // 
@@ -127,28 +131,21 @@
             // 
             makeInvoiceToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { separatelyToolStripMenuItem, totalToolStripMenuItem });
             makeInvoiceToolStripMenuItem.Name = "makeInvoiceToolStripMenuItem";
-            makeInvoiceToolStripMenuItem.Size = new Size(192, 22);
+            makeInvoiceToolStripMenuItem.Size = new Size(165, 24);
             makeInvoiceToolStripMenuItem.Text = "Make Invoice";
             // 
             // separatelyToolStripMenuItem
             // 
             separatelyToolStripMenuItem.Name = "separatelyToolStripMenuItem";
-            separatelyToolStripMenuItem.Size = new Size(143, 24);
+            separatelyToolStripMenuItem.Size = new Size(154, 24);
             separatelyToolStripMenuItem.Text = "Separately";
             // 
             // totalToolStripMenuItem
             // 
             totalToolStripMenuItem.Name = "totalToolStripMenuItem";
-            totalToolStripMenuItem.Size = new Size(143, 24);
+            totalToolStripMenuItem.Size = new Size(154, 24);
             totalToolStripMenuItem.Text = "Total";
             totalToolStripMenuItem.Click += totalToolStripMenuItem_Click;
-            // 
-            // deleteToolStripMenuItem
-            // 
-            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(192, 22);
-            deleteToolStripMenuItem.Text = "Delete Product";
-            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // listBox1
             // 
@@ -157,10 +154,11 @@
             listBox1.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold, GraphicsUnit.Point, 0);
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 21;
-            listBox1.Location = new Point(819, 179);
-            listBox1.MinimumSize = new Size(245, 276);
+            listBox1.Location = new Point(936, 211);
+            listBox1.Margin = new Padding(3, 4, 3, 4);
+            listBox1.MinimumSize = new Size(279, 324);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(245, 256);
+            listBox1.Size = new Size(279, 319);
             listBox1.TabIndex = 4;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
@@ -168,7 +166,8 @@
             // 
             guna2HtmlLabel1.BackColor = Color.Transparent;
             guna2HtmlLabel1.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Bold);
-            guna2HtmlLabel1.Location = new Point(12, 136);
+            guna2HtmlLabel1.Location = new Point(14, 160);
+            guna2HtmlLabel1.Margin = new Padding(3, 4, 3, 4);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             guna2HtmlLabel1.Size = new Size(75, 27);
             guna2HtmlLabel1.TabIndex = 5;
@@ -178,7 +177,8 @@
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Bold);
-            guna2HtmlLabel2.Location = new Point(332, 136);
+            guna2HtmlLabel2.Location = new Point(379, 160);
+            guna2HtmlLabel2.Margin = new Padding(3, 4, 3, 4);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             guna2HtmlLabel2.Size = new Size(83, 27);
             guna2HtmlLabel2.TabIndex = 6;
@@ -188,7 +188,8 @@
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Bold);
-            guna2HtmlLabel3.Location = new Point(641, 136);
+            guna2HtmlLabel3.Location = new Point(733, 160);
+            guna2HtmlLabel3.Margin = new Padding(3, 4, 3, 4);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             guna2HtmlLabel3.Size = new Size(50, 27);
             guna2HtmlLabel3.TabIndex = 7;
@@ -198,7 +199,8 @@
             // 
             priceLabel.BackColor = Color.Transparent;
             priceLabel.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Bold);
-            priceLabel.Location = new Point(716, 136);
+            priceLabel.Location = new Point(818, 160);
+            priceLabel.Margin = new Padding(3, 4, 3, 4);
             priceLabel.Name = "priceLabel";
             priceLabel.Size = new Size(3, 2);
             priceLabel.TabIndex = 8;
@@ -217,13 +219,14 @@
             productNameBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             productNameBox.Font = new Font("Segoe UI", 9F);
             productNameBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            productNameBox.Location = new Point(93, 122);
+            productNameBox.Location = new Point(106, 144);
+            productNameBox.Margin = new Padding(3, 4, 3, 4);
             productNameBox.Name = "productNameBox";
             productNameBox.PasswordChar = '\0';
             productNameBox.PlaceholderText = "";
             productNameBox.SelectedText = "";
             productNameBox.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            productNameBox.Size = new Size(221, 45);
+            productNameBox.Size = new Size(253, 53);
             productNameBox.TabIndex = 9;
             productNameBox.TextChanged += productNameBox_TextChanged;
             // 
@@ -239,13 +242,14 @@
             productQuantityBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             productQuantityBox.Font = new Font("Segoe UI", 9F);
             productQuantityBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            productQuantityBox.Location = new Point(421, 122);
+            productQuantityBox.Location = new Point(481, 144);
+            productQuantityBox.Margin = new Padding(3, 4, 3, 4);
             productQuantityBox.Name = "productQuantityBox";
             productQuantityBox.PasswordChar = '\0';
             productQuantityBox.PlaceholderText = "";
             productQuantityBox.SelectedText = "";
             productQuantityBox.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            productQuantityBox.Size = new Size(140, 45);
+            productQuantityBox.Size = new Size(160, 53);
             productQuantityBox.TabIndex = 10;
             productQuantityBox.KeyDown += productQuantityBox_KeyDown;
             // 
@@ -260,10 +264,11 @@
             addTableButton.FillColor = Color.WhiteSmoke;
             addTableButton.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold, GraphicsUnit.Point, 0);
             addTableButton.ForeColor = Color.Black;
-            addTableButton.Location = new Point(819, 461);
+            addTableButton.Location = new Point(936, 542);
+            addTableButton.Margin = new Padding(3, 4, 3, 4);
             addTableButton.Name = "addTableButton";
             addTableButton.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            addTableButton.Size = new Size(245, 50);
+            addTableButton.Size = new Size(280, 59);
             addTableButton.TabIndex = 11;
             addTableButton.Text = "+ Add Table";
             addTableButton.Click += addTableButton_Click;
@@ -291,11 +296,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             orderGrid.DefaultCellStyle = dataGridViewCellStyle3;
             orderGrid.GridColor = Color.FromArgb(231, 229, 255);
-            orderGrid.Location = new Point(58, 354);
+            orderGrid.Location = new Point(66, 416);
+            orderGrid.Margin = new Padding(3, 4, 3, 4);
             orderGrid.Name = "orderGrid";
             orderGrid.RowHeadersVisible = false;
             orderGrid.RowHeadersWidth = 45;
-            orderGrid.Size = new Size(648, 166);
+            orderGrid.RowTemplate.Height = 27;
+            orderGrid.Size = new Size(741, 195);
             orderGrid.TabIndex = 12;
             orderGrid.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             orderGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -325,15 +332,16 @@
             tableLayoutPanel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 138F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 158F));
             tableLayoutPanel1.Controls.Add(sumaLabel2, 1, 0);
             tableLayoutPanel1.Controls.Add(guna2HtmlLabel4, 0, 0);
-            tableLayoutPanel1.Location = new Point(569, 595);
+            tableLayoutPanel1.Location = new Point(650, 700);
+            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(221, 42);
+            tableLayoutPanel1.Size = new Size(253, 49);
             tableLayoutPanel1.TabIndex = 13;
             // 
             // sumaLabel2
@@ -341,7 +349,8 @@
             sumaLabel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             sumaLabel2.BackColor = Color.Transparent;
             sumaLabel2.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
-            sumaLabel2.Location = new Point(215, 37);
+            sumaLabel2.Location = new Point(247, 43);
+            sumaLabel2.Margin = new Padding(3, 4, 3, 4);
             sumaLabel2.Name = "sumaLabel2";
             sumaLabel2.Size = new Size(3, 2);
             sumaLabel2.TabIndex = 15;
@@ -352,7 +361,8 @@
             guna2HtmlLabel4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             guna2HtmlLabel4.BackColor = Color.Transparent;
             guna2HtmlLabel4.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
-            guna2HtmlLabel4.Location = new Point(34, 16);
+            guna2HtmlLabel4.Location = new Point(46, 22);
+            guna2HtmlLabel4.Margin = new Padding(3, 4, 3, 4);
             guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             guna2HtmlLabel4.Size = new Size(46, 23);
             guna2HtmlLabel4.TabIndex = 14;
@@ -377,7 +387,7 @@
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             invoiceGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             invoiceGrid.ColumnHeadersHeight = 30;
-            invoiceGrid.ContextMenuStrip = contextMenuStrip1;
+            invoiceGrid.ContextMenuStrip = contextMenuStrip2;
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = Color.White;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -387,11 +397,15 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             invoiceGrid.DefaultCellStyle = dataGridViewCellStyle6;
             invoiceGrid.GridColor = Color.FromArgb(231, 229, 255);
-            invoiceGrid.Location = new Point(9, 182);
+            invoiceGrid.Location = new Point(10, 214);
+            invoiceGrid.Margin = new Padding(3, 4, 3, 4);
             invoiceGrid.Name = "invoiceGrid";
+            invoiceGrid.ReadOnly = true;
             invoiceGrid.RowHeadersVisible = false;
             invoiceGrid.RowHeadersWidth = 45;
-            invoiceGrid.Size = new Size(781, 407);
+            invoiceGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            invoiceGrid.RowTemplate.Height = 27;
+            invoiceGrid.Size = new Size(893, 479);
             invoiceGrid.TabIndex = 14;
             invoiceGrid.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             invoiceGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -406,7 +420,7 @@
             invoiceGrid.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             invoiceGrid.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             invoiceGrid.ThemeStyle.HeaderStyle.Height = 30;
-            invoiceGrid.ThemeStyle.ReadOnly = false;
+            invoiceGrid.ThemeStyle.ReadOnly = true;
             invoiceGrid.ThemeStyle.RowsStyle.BackColor = Color.White;
             invoiceGrid.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             invoiceGrid.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 8.830189F);
@@ -414,13 +428,28 @@
             invoiceGrid.ThemeStyle.RowsStyle.Height = 27;
             invoiceGrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             invoiceGrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            invoiceGrid.KeyDown += invoiceGrid_KeyDown;
+            // 
+            // contextMenuStrip2
+            // 
+            contextMenuStrip2.ImageScalingSize = new Size(18, 18);
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem });
+            contextMenuStrip2.Name = "contextMenuStrip2";
+            contextMenuStrip2.Size = new Size(193, 52);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(192, 24);
+            deleteToolStripMenuItem.Text = "Delete ";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click_1;
             // 
             // userForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
-            ClientSize = new Size(1076, 649);
+            ClientSize = new Size(1230, 764);
             Controls.Add(invoiceGrid);
             Controls.Add(orderGrid);
             Controls.Add(tableLayoutPanel1);
@@ -433,6 +462,7 @@
             Controls.Add(guna2HtmlLabel1);
             Controls.Add(listBox1);
             Controls.Add(guna2Panel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "userForm";
             Text = "userForm";
             FormClosing += userForm_FormClosing;
@@ -445,6 +475,7 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)invoiceGrid).EndInit();
+            contextMenuStrip2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -471,7 +502,8 @@
         private ToolStripMenuItem makeInvoiceToolStripMenuItem;
         private ToolStripMenuItem separatelyToolStripMenuItem;
         private ToolStripMenuItem totalToolStripMenuItem;
-        private ToolStripMenuItem deleteToolStripMenuItem;
         private Guna.UI2.WinForms.Guna2DataGridView invoiceGrid;
+        private ContextMenuStrip contextMenuStrip2;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

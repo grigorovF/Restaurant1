@@ -186,6 +186,7 @@ namespace Restaurant
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 TextAlignment = ContentAlignment.MiddleLeft
             };
+            
             totalSumLabel.Size = TextRenderer.MeasureText(totalSumLabel.Text, totalSumLabel.Font);
             totalSumLabel.Location = new Point((this.ClientSize.Width - totalSumLabel.Width) - 5, 170 + (invoiceTable.Rows.Count * 40));
             this.Controls.Add(totalSumLabel);

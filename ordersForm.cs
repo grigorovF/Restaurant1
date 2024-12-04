@@ -111,45 +111,62 @@ namespace Restaurant
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            var input = MessageBox.Show("Are you realy done with this order?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (input == DialogResult.Yes)
+            if (tableListBox.SelectedIndex >= 0)
             {
-                try
+                if (orderGridView.SelectedRows.Count >= 0)
                 {
-                    conn.Open();
-                    if (orderGridView.SelectedRows.Count > 0)
+                    string selectedTable = tableListBox.SelectedItem.ToString();
+                    var input = MessageBox.Show("Are you realy done with this order?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (input == DialogResult.Yes)
                     {
-                        string s1 = "DELETE FROM Orders WHERE OrderID = @orderID AND TableName = @TableName";
                         foreach (DataGridViewRow row in orderGridView.SelectedRows)
                         {
-                            if (!row.IsNewRow)
+                            if (row.IsNewRow) continue;
+
+                                                       
+                            int index = row.Index;
+                            string productName = row.Cells[2].Value.ToString(); 
+                            try
                             {
-                                string orderID = row.Cells[0].Value.ToString();
-                                string tableName = tableListBox.SelectedItem.ToString();
-                                using (SqlCommand cmd = new SqlCommand(s1, conn))
-                                {
-                                    cmd.Parameters.AddWithValue("@OrderID", this.orderGridView.SelectedCells.ToString());
-                                    cmd.Parameters.AddWithValue("@TableName", tableListBox.SelectedItem.ToString());
-                                    cmd.ExecuteNonQuery();
+                                conn.Open();
+                                string delete = "DELETE FROM Orders WHERE Product = @Product";
+                                using (SqlCommand del = new SqlCommand(delete, conn)) {
+                                    del.Parameters.AddWithValue("@Product", productName);
+                                    del.ExecuteNonQuery();
+
                                 }
 
+
+                               /* string select = "SELECT * FROM Orders";
+                                using (SqlCommand sel = new SqlCommand(select, conn)) {
+                                    using (SqlDataAdapter adapter = new SqlDataAdapter(sel)) { 
+                                        DataTable dataTable = new DataTable();
+                                        adapter.Fill(dataTable);
+                                        orderGridView.DataSource = null;
+                                        orderGridView.DataSource = dataTable;
+                                    }
+                                }
+                               */
+       
+                                orderGridView.Rows.RemoveAt(index);
+                                tableListBox.Refresh();
+
+
+                                //HERE
+                            }
+                            catch (Exception ex)
+                            {
+
+                                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            }
+                            finally
+                            {
+                                conn.Close();
                             }
                         }
                     }
-                    orderGridView.DataSource = null;
-                    tableListBox.Items.Remove(tableListBox.SelectedItem);
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show(ex.Message, "Error6", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    conn.Close();
                 }
             }
-
         }
 
         private void ordersForm_FormClosing(object sender, FormClosingEventArgs e)
