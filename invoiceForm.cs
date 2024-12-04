@@ -17,6 +17,8 @@ namespace Restaurant
     {
         SqlConnection conn = new SqlConnection("Data Source=Grigorov\\SQLEXPRESS;Initial Catalog=restaurantManagment;Integrated Security=True;Encrypt=False; MultipleActiveResultSets=True");
         DataTable invoiceTable = new DataTable();
+        int yoffset = 0;
+        double totalSum = 0;
         public invoiceForm(DataTable invoiceTable)
         {
             this.invoiceTable = invoiceTable;
@@ -119,9 +121,8 @@ namespace Restaurant
                 Font = new Font(Font.FontFamily, 10, FontStyle.Bold)
             };
             this.Controls.Add(headerTotal);
+            
 
-
-            int yoffset = 0;
             foreach (DataRow row in invoiceTable.Select()) {
                 string product = row[0].ToString();
                 string quantity = row[1].ToString();
@@ -172,10 +173,22 @@ namespace Restaurant
                 this.Controls.Add(totalLabel);
 
                 yoffset += 40;
-
+                totalSum = totalSum + double.Parse(totalLabel.Text);
 
             }
-            //total label and adding
+            //total
+
+
+            Guna2HtmlLabel totalSumLabel = new Guna2HtmlLabel
+            {
+                Text = "Total: " + totalSum,
+                AutoSize = true,
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                TextAlignment = ContentAlignment.MiddleLeft
+            };
+            totalSumLabel.Size = TextRenderer.MeasureText(totalSumLabel.Text, totalSumLabel.Font);
+            totalSumLabel.Location = new Point((this.ClientSize.Width - totalSumLabel.Width) - 5, 170 + (invoiceTable.Rows.Count * 40));
+            this.Controls.Add(totalSumLabel);
 
         }
 
@@ -186,7 +199,11 @@ namespace Restaurant
             Point p1 = new Point(5, 132);
             Point p2 = new Point(370, 132);
             g.DrawLine(p, p1, p2);
-
+            
+            Point p3 = new Point(5, 150 + (invoiceTable.Rows.Count * 40));
+            Point p4 = new Point(370, 150 + (invoiceTable.Rows.Count * 40));
+            g.DrawLine (p, p3, p4);
+            
         }
     }
 }

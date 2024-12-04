@@ -354,52 +354,7 @@ namespace Restaurant
 
 
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            {
-                if (listBox1.SelectedIndex >= 0)
-                {
-                    string selectedTable = listBox1.SelectedItem.ToString();
-                    if (invoiceDictionatry.ContainsKey(selectedTable))
-                    {
-                        DataTable table = invoiceDictionatry[selectedTable];
-                        if (invoiceGrid.CurrentCell != null)
-                        {
-                            int index = invoiceGrid.CurrentCell.RowIndex;
-                            string productName = invoiceGrid.Rows[index].Cells[0].Value.ToString();
-                            int quantity = Convert.ToInt32(invoiceGrid.Rows[index].Cells[1].Value);
-                            table.Rows.RemoveAt(index);
-                            invoiceGrid.DataSource = null;
-                            invoiceGrid.DataSource = table;
 
-                            try
-                            {
-                                conn.Open();
-                                string s = "UPDATE itemTable SET Quantity = Quantity + @quantity WHERE Product = @Product";
-                                SqlCommand update = new SqlCommand(s, conn);
-                                update.Parameters.AddWithValue("@quantity", quantity);
-                                update.Parameters.AddWithValue("@Product", productName);
-                                update.ExecuteNonQuery();
-                                MessageBox.Show("Product deleted and quantity updated!", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                conn.Close();
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message, "Error Deleting Product", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Please select a row to delete.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please select a table first.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
 
         private void makeOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -508,6 +463,51 @@ namespace Restaurant
             invoiceForm invoiceForm = new invoiceForm(invoioceTable);
             invoiceForm.ShowDialog();
 
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                string selectedTable = listBox1.SelectedItem.ToString();
+                if (invoiceDictionatry.ContainsKey(selectedTable))
+                {
+                    DataTable table = invoiceDictionatry[selectedTable];
+                    if (invoiceGrid.CurrentCell != null)
+                    {
+                        int index = invoiceGrid.CurrentCell.RowIndex;
+                        string productName = invoiceGrid.Rows[index].Cells[0].Value.ToString();
+                        int quantity = Convert.ToInt32(invoiceGrid.Rows[index].Cells[1].Value);
+                        table.Rows.RemoveAt(index);
+                        invoiceGrid.DataSource = null;
+                        invoiceGrid.DataSource = table;
+
+                        try
+                        {
+                            conn.Open();
+                            string s = "UPDATE itemTable SET Quantity = Quantity + @quantity WHERE Product = @Product";
+                            SqlCommand update = new SqlCommand(s, conn);
+                            update.Parameters.AddWithValue("@quantity", quantity);
+                            update.Parameters.AddWithValue("@Product", productName);
+                            update.ExecuteNonQuery();
+                            MessageBox.Show("Product deleted and quantity updated!", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error Deleting Product", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select a row to delete.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a table first.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

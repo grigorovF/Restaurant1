@@ -32,22 +32,21 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(userForm));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             userNameLabel = new Label();
-            invoiceGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             contextMenuStrip1 = new ContextMenuStrip(components);
             makeOrderToolStripMenuItem = new ToolStripMenuItem();
             makeInvoiceToolStripMenuItem = new ToolStripMenuItem();
@@ -66,12 +65,13 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             sumaLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            invoiceGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             guna2Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)invoiceGrid).BeginInit();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)orderGrid).BeginInit();
             tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)invoiceGrid).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -109,57 +109,6 @@
             userNameLabel.TabIndex = 0;
             userNameLabel.Text = "owner";
             // 
-            // invoiceGrid
-            // 
-            dataGridViewCellStyle1.BackColor = Color.White;
-            invoiceGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            invoiceGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12.2264156F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            invoiceGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            invoiceGrid.ColumnHeadersHeight = 30;
-            invoiceGrid.ContextMenuStrip = contextMenuStrip1;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 12.18868F, FontStyle.Bold | FontStyle.Italic);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = Color.DodgerBlue;
-            dataGridViewCellStyle3.SelectionForeColor = Color.White;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            invoiceGrid.DefaultCellStyle = dataGridViewCellStyle3;
-            invoiceGrid.GridColor = Color.FromArgb(231, 229, 255);
-            invoiceGrid.Location = new Point(5, 179);
-            invoiceGrid.Name = "invoiceGrid";
-            invoiceGrid.RowHeadersVisible = false;
-            invoiceGrid.RowHeadersWidth = 30;
-            invoiceGrid.Size = new Size(782, 413);
-            invoiceGrid.TabIndex = 3;
-            invoiceGrid.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            invoiceGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
-            invoiceGrid.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            invoiceGrid.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            invoiceGrid.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            invoiceGrid.ThemeStyle.BackColor = Color.White;
-            invoiceGrid.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            invoiceGrid.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            invoiceGrid.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            invoiceGrid.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 8.830189F);
-            invoiceGrid.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            invoiceGrid.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            invoiceGrid.ThemeStyle.HeaderStyle.Height = 30;
-            invoiceGrid.ThemeStyle.ReadOnly = false;
-            invoiceGrid.ThemeStyle.RowsStyle.BackColor = Color.White;
-            invoiceGrid.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            invoiceGrid.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 8.830189F);
-            invoiceGrid.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            invoiceGrid.ThemeStyle.RowsStyle.Height = 27;
-            invoiceGrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            invoiceGrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(18, 18);
@@ -184,13 +133,13 @@
             // separatelyToolStripMenuItem
             // 
             separatelyToolStripMenuItem.Name = "separatelyToolStripMenuItem";
-            separatelyToolStripMenuItem.Size = new Size(198, 24);
+            separatelyToolStripMenuItem.Size = new Size(143, 24);
             separatelyToolStripMenuItem.Text = "Separately";
             // 
             // totalToolStripMenuItem
             // 
             totalToolStripMenuItem.Name = "totalToolStripMenuItem";
-            totalToolStripMenuItem.Size = new Size(198, 24);
+            totalToolStripMenuItem.Size = new Size(143, 24);
             totalToolStripMenuItem.Text = "Total";
             totalToolStripMenuItem.Click += totalToolStripMenuItem_Click;
             // 
@@ -198,7 +147,8 @@
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             deleteToolStripMenuItem.Size = new Size(192, 22);
-            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Text = "Delete Product";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // listBox1
             // 
@@ -320,26 +270,26 @@
             // 
             // orderGrid
             // 
-            dataGridViewCellStyle4.BackColor = Color.White;
-            orderGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 8.830189F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            orderGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            orderGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 8.830189F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            orderGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             orderGrid.ColumnHeadersHeight = 4;
             orderGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 8.830189F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            orderGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 8.830189F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            orderGrid.DefaultCellStyle = dataGridViewCellStyle3;
             orderGrid.GridColor = Color.FromArgb(231, 229, 255);
             orderGrid.Location = new Point(58, 354);
             orderGrid.Name = "orderGrid";
@@ -409,12 +359,69 @@
             guna2HtmlLabel4.Text = "Total:";
             guna2HtmlLabel4.TextAlignment = ContentAlignment.MiddleCenter;
             // 
+            // invoiceGrid
+            // 
+            invoiceGrid.AllowUserToAddRows = false;
+            invoiceGrid.AllowUserToDeleteRows = false;
+            invoiceGrid.AllowUserToResizeColumns = false;
+            invoiceGrid.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            invoiceGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            invoiceGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = Color.MediumBlue;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = Color.WhiteSmoke;
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            invoiceGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            invoiceGrid.ColumnHeadersHeight = 30;
+            invoiceGrid.ContextMenuStrip = contextMenuStrip1;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            invoiceGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            invoiceGrid.GridColor = Color.FromArgb(231, 229, 255);
+            invoiceGrid.Location = new Point(9, 182);
+            invoiceGrid.Name = "invoiceGrid";
+            invoiceGrid.RowHeadersVisible = false;
+            invoiceGrid.RowHeadersWidth = 45;
+            invoiceGrid.Size = new Size(781, 407);
+            invoiceGrid.TabIndex = 14;
+            invoiceGrid.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            invoiceGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
+            invoiceGrid.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            invoiceGrid.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            invoiceGrid.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            invoiceGrid.ThemeStyle.BackColor = Color.White;
+            invoiceGrid.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            invoiceGrid.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            invoiceGrid.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            invoiceGrid.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 8.830189F);
+            invoiceGrid.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            invoiceGrid.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            invoiceGrid.ThemeStyle.HeaderStyle.Height = 30;
+            invoiceGrid.ThemeStyle.ReadOnly = false;
+            invoiceGrid.ThemeStyle.RowsStyle.BackColor = Color.White;
+            invoiceGrid.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            invoiceGrid.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 8.830189F);
+            invoiceGrid.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            invoiceGrid.ThemeStyle.RowsStyle.Height = 27;
+            invoiceGrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            invoiceGrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
             // userForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
             ClientSize = new Size(1076, 649);
+            Controls.Add(invoiceGrid);
             Controls.Add(orderGrid);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(addTableButton);
@@ -426,7 +433,6 @@
             Controls.Add(guna2HtmlLabel1);
             Controls.Add(listBox1);
             Controls.Add(guna2Panel1);
-            Controls.Add(invoiceGrid);
             Name = "userForm";
             Text = "userForm";
             FormClosing += userForm_FormClosing;
@@ -434,11 +440,11 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)invoiceGrid).EndInit();
             contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)orderGrid).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)invoiceGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -448,7 +454,6 @@
         private PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Label userNameLabel;
-        private Guna.UI2.WinForms.Guna2DataGridView invoiceGrid;
         private ListBox listBox1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
@@ -467,5 +472,6 @@
         private ToolStripMenuItem separatelyToolStripMenuItem;
         private ToolStripMenuItem totalToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem;
+        private Guna.UI2.WinForms.Guna2DataGridView invoiceGrid;
     }
 }
