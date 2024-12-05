@@ -12,32 +12,42 @@ using Microsoft.Data.SqlClient;
 
 namespace Restaurant
 {
-
     public partial class invoiceForm : Form
     {
         SqlConnection conn = new SqlConnection("Data Source=Grigorov\\SQLEXPRESS;Initial Catalog=restaurantManagment;Integrated Security=True;Encrypt=False; MultipleActiveResultSets=True");
         DataTable invoiceTable = new DataTable();
+        string waiter;
         int yoffset = 0;
         double totalSum = 0;
-        public invoiceForm(DataTable invoiceTable)
+        public string inNumber;
+        public invoiceForm(DataTable invoiceTable, string waiter, string inNumber)
         {
+            this.inNumber = inNumber;
             this.invoiceTable = invoiceTable;
+            this.waiter = waiter;
+            this.ControlBox = true;
             InitializeComponent();
         }
 
-        private string inNumber()
-        {
-            Random random = new Random();
-            HashSet<int> generate = new HashSet<int>();
-            int iNumber;
-            do
-            {
-                iNumber = random.Next(0, 999999999);
-            }
-            while (generate.Contains(iNumber));
+        
 
-            return iNumber.ToString();
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            Pen p = new Pen(Color.Black, 3);
+            Point p1 = new Point(5, 132);
+            Point p2 = new Point(370, 132);
+            g.DrawLine(p, p1, p2);
+
+            Point p3 = new Point(5, 150 + (invoiceTable.Rows.Count * 40));
+            Point p4 = new Point(370, 150 + (invoiceTable.Rows.Count * 40));
+            g.DrawLine(p, p3, p4);
+
         }
+
+        
 
         private void invoiceForm_Load(object sender, EventArgs e)
         {
@@ -77,7 +87,7 @@ namespace Restaurant
 
             Guna2HtmlLabel serialNumber = new Guna2HtmlLabel
             {
-                Text = "Invoice: " + inNumber(),
+                Text = "Invoice: " + inNumber,
                 Font = new Font("Segoe UI", 10, FontStyle.Italic),
                 AutoSize = true
             };
@@ -121,9 +131,10 @@ namespace Restaurant
                 Font = new Font(Font.FontFamily, 10, FontStyle.Bold)
             };
             this.Controls.Add(headerTotal);
-            
 
-            foreach (DataRow row in invoiceTable.Select()) {
+
+            foreach (DataRow row in invoiceTable.Select())
+            {
                 string product = row[0].ToString();
                 string quantity = row[1].ToString();
                 string price = row[2].ToString();
@@ -158,7 +169,7 @@ namespace Restaurant
                     Location = new Point(245, y),
                     AutoSize = true,
                     Font = new Font(Font.FontFamily, 10),
-                    TextAlignment = ContentAlignment.MiddleRight 
+                    TextAlignment = ContentAlignment.MiddleRight
                 };
                 this.Controls.Add(priceLabel);
 
@@ -186,25 +197,77 @@ namespace Restaurant
                 Font = new Font("Segoe UI", 12, FontStyle.Bold),
                 TextAlignment = ContentAlignment.MiddleLeft
             };
-            
+
             totalSumLabel.Size = TextRenderer.MeasureText(totalSumLabel.Text, totalSumLabel.Font);
-            totalSumLabel.Location = new Point((this.ClientSize.Width - totalSumLabel.Width) - 5, 170 + (invoiceTable.Rows.Count * 40));
+            totalSumLabel.Location = new Point((this.ClientSize.Width - totalSumLabel.Width) - 35, 170 + (invoiceTable.Rows.Count * 40));
             this.Controls.Add(totalSumLabel);
 
         }
 
-        protected override void OnPaint(PaintEventArgs e) {
-            Graphics g = e.Graphics;
+        private void invoiceForm_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                using (SqlTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        if (inNumber == null) {
+                            MessageBox.Show("HERE");
+                        }
+                        string s1 = "INSERT INTO outcommingInvoices (invoiceNumber, Waiter, Date) VALUES (@invoiceNumber, @Waiter, @Date)";
+                        using (SqlCommand cmd1 = new SqlCommand(s1, conn, transaction))
+                        {
+                            cmd1.Parameters.AddWithValue("@invoiceNumber", inNumber);
+                            cmd1.Parameters.AddWithValue("@Waiter", waiter);
+                            cmd1.Parameters.AddWithValue("@Date", DateTime.Now);
+                            cmd1.ExecuteNonQuery();
+                            MessageBox.Show("Invoice is stored!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
 
-            Pen p = new Pen(Color.Black, 3);
-            Point p1 = new Point(5, 132);
-            Point p2 = new Point(370, 132);
-            g.DrawLine(p, p1, p2);
-            
-            Point p3 = new Point(5, 150 + (invoiceTable.Rows.Count * 40));
-            Point p4 = new Point(370, 150 + (invoiceTable.Rows.Count * 40));
-            g.DrawLine (p, p3, p4);
-            
+                        // Insert into outcommingProducts
+                        string s2 = "INSERT INTO outcommingProducts (invoiceNumber, Product, Quantity, Price, Total) VALUES (@invoiceNumber, @Product, @Quantity, @Price, @Total)";
+                        foreach (DataRow row in invoiceTable.Rows)
+                        {
+                            using (SqlCommand cmd2 = new SqlCommand(s2, conn, transaction))
+                            {
+                                cmd2.Parameters.AddWithValue("@invoiceNumber", inNumber); 
+                                cmd2.Parameters.AddWithValue("@Product", row["Product"].ToString());
+                                cmd2.Parameters.AddWithValue("@Quantity", Convert.ToInt32(row["Quantity"]));
+                                cmd2.Parameters.AddWithValue("@Price", Convert.ToDecimal(row["Price"]));
+                                cmd2.Parameters.AddWithValue("@Total", Convert.ToDecimal(row["Total"]));
+                                cmd2.ExecuteNonQuery();
+                            }
+                        }
+
+
+                        // Commit transaction
+                        transaction.Commit();
+                        MessageBox.Show("Products are stored!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        // Rollback transaction in case of SQL error
+                        transaction.Rollback();
+                        MessageBox.Show("SQL Error: " + sqlEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Rollback transaction in case of other errors
+                        transaction.Rollback();
+                        MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

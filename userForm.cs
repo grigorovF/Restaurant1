@@ -20,6 +20,7 @@ namespace Restaurant
         private Dictionary<string, DataTable> invoiceDictionatry = new Dictionary<string, DataTable>();
         DataTable orderTable = new DataTable();
 
+        string iNummber;
         private string currentUser;
         private Dictionary<string, List<string>> userTables = new Dictionary<string, List<string>>();
         string password;
@@ -35,6 +36,22 @@ namespace Restaurant
             InitializeComponent();
         }
 
+
+        private string getNummber()
+        {
+            HashSet<int> list = new HashSet<int>();
+            Random random = new Random();
+            int num;
+            do
+            {
+                num = random.Next(0, 100000000);
+            }
+            while (list.Contains(num));
+
+            iNummber = num.ToString();
+
+            return iNummber;
+        }
         private void userForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             var res = MessageBox.Show("Do you really want to close?", "Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -218,6 +235,7 @@ namespace Restaurant
                 invoiceTable.Columns.Add("Total", typeof(double));
                 invoiceDictionatry[tableName] = invoiceTable;
                 invoiceGrid.DataSource = invoiceTable;
+
             }
         }
 
@@ -383,11 +401,28 @@ namespace Restaurant
                     double price = Convert.ToDouble(row["Price"]);
                     double total = Convert.ToDouble(row["Total"]);
 
-                    string s1 = @"INSERT INTO Tables (TableName, Product, Quantity, Price, Total, UserID)
-                                  VALUES (@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
 
-                    using (SqlCommand insert = new SqlCommand(s1, conn))
+                    string s1 = @"INSERT INTO Orders (OrderID, TableName, Product, Quantity, UserID)
+                                  VALUES (@OrderID, @TableName, @Product, @Quantity, @UserID)";
+
+                    using (SqlCommand insert1 = new SqlCommand(s1, conn))
                     {
+                        Random random = new Random();
+                        string s = random.Next(0, 100).ToString();
+                        insert1.Parameters.AddWithValue("@OrderID", s);
+                        insert1.Parameters.AddWithValue("@TableName", selectedTable);
+                        insert1.Parameters.AddWithValue("@Product", product);
+                        insert1.Parameters.AddWithValue("@Quantity", quantity);
+                        insert1.Parameters.AddWithValue("@UserID", currentUser);
+                        insert1.ExecuteNonQuery();
+                    }
+
+                    string s2 = @"INSERT INTO Tables (InvoiceID, TableName, Product, Quantity, Price, Total, UserID)
+                                  VALUES (@InvoiceID,@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
+
+                    using (SqlCommand insert = new SqlCommand(s2, conn))
+                    {
+                        insert.Parameters.AddWithValue("@InvoiceID", iNummber);
                         insert.Parameters.AddWithValue("@TableName", selectedTable);
                         insert.Parameters.AddWithValue("@Product", product);
                         insert.Parameters.AddWithValue("@Quantity", quantity);
@@ -397,18 +432,6 @@ namespace Restaurant
                         insert.ExecuteNonQuery();
                     }
 
-                    string s2 = @"INSERT INTO Orders (OrderID, TableName, Product, Quantity, UserID)
-                                  VALUES (@OrderID, @TableName, @Product, @Quantity, @UserID)";
-
-                    using (SqlCommand insert2 = new SqlCommand(s2, conn))
-                    {
-                        insert2.Parameters.AddWithValue("@OrderID", getNummber());
-                        insert2.Parameters.AddWithValue("@TableName", selectedTable);
-                        insert2.Parameters.AddWithValue("@Product", product);
-                        insert2.Parameters.AddWithValue("@Quantity", quantity);
-                        insert2.Parameters.AddWithValue("@UserID", currentUser);
-                        insert2.ExecuteNonQuery();
-                    }
                 }
 
             }
@@ -427,21 +450,7 @@ namespace Restaurant
 
         }
 
-        private string getNummber()
-        {
-            HashSet<int> list = new HashSet<int>();
-            Random random = new Random();
 
-            int num;
-
-            do
-            {
-                num = random.Next(0, 100000000);
-            }
-            while (list.Contains(num));
-
-            return num.ToString();
-        }
 
         private void totalToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -459,56 +468,33 @@ namespace Restaurant
                 return;
             }
 
-            DataTable invoioceTable = invoiceDictionatry[selectedTable];
-            invoiceForm invoiceForm = new invoiceForm(invoioceTable);
+            DataTable table = invoiceDictionatry[selectedTable];
+            invoiceForm invoiceForm = new invoiceForm(table, userNameLabel.Text.ToString(), getNummber());
             invoiceForm.ShowDialog();
 
-        }
-
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+            /*  var result = MessageBox.Show("Do you want to delete this table after printing?", "Delete Table", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        if (result == DialogResult.Yes)
         {
-            if (listBox1.SelectedIndex >= 0)
-            {
-                string selectedTable = listBox1.SelectedItem.ToString();
-                if (invoiceDictionatry.ContainsKey(selectedTable))
-                {
-                    DataTable table = invoiceDictionatry[selectedTable];
-                    if (invoiceGrid.CurrentCell != null)
-                    {
-                        int index = invoiceGrid.CurrentCell.RowIndex;
-                        string productName = invoiceGrid.Rows[index].Cells[0].Value.ToString();
-                        int quantity = Convert.ToInt32(invoiceGrid.Rows[index].Cells[1].Value);
-                        table.Rows.RemoveAt(index);
-                        invoiceGrid.DataSource = null;
-                        invoiceGrid.DataSource = table;
+            // Remove from listBox1
+            listBox1.Items.Remove(selectedTable);
 
-                        try
-                        {
-                            conn.Open();
-                            string s = "UPDATE itemTable SET Quantity = Quantity + @quantity WHERE Product = @Product";
-                            SqlCommand update = new SqlCommand(s, conn);
-                            update.Parameters.AddWithValue("@quantity", quantity);
-                            update.Parameters.AddWithValue("@Product", productName);
-                            update.ExecuteNonQuery();
-                            MessageBox.Show("Product deleted and quantity updated!", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            conn.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "Error Deleting Product", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please select a row to delete.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
+            // Remove from dictionaries
+            if (orderDictionary.ContainsKey(selectedTable))
+            {
+                orderDictionary.Remove(selectedTable);
             }
+            if (orderDictionatry.ContainsKey(selectedTable))
+            {
+                orderDictionatry.Remove(selectedTable);
+            }
+
+            MessageBox.Show("Table removed successfully.", "Table Removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
             {
-                MessageBox.Show("Please select a table first.", "Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                MessageBox.Show("Please select a table to generate an invoice.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }*/
         }
+    
 
 
         private void invoiceGrid_KeyDown(object sender, KeyEventArgs e)

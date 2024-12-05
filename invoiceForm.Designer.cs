@@ -32,13 +32,12 @@
             // 
             // invoiceForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(384, 623);
-            ControlBox = false;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            ClientSize = new Size(391, 450);
             Name = "invoiceForm";
-            Text = "Invoice";
+            Text = "invoiceForm";
+            FormClosing += invoiceForm_FormClosing_1;
             Load += invoiceForm_Load;
             ResumeLayout(false);
         }
