@@ -48,22 +48,28 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             label1 = new Label();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             pictureBox1 = new PictureBox();
             incommingTab = new Guna.UI2.WinForms.Guna2Button();
             outcommingTab = new Guna.UI2.WinForms.Guna2Button();
-            Users = new Guna.UI2.WinForms.Guna2Button();
-            guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
+            usersTab = new Guna.UI2.WinForms.Guna2Button();
+            incommingGroup = new Guna.UI2.WinForms.Guna2GroupBox();
             inItemCombo = new Guna.UI2.WinForms.Guna2ComboBox();
             incommingNummberTextBox = new Guna.UI2.WinForms.Guna2TextBox();
             inItemCheck = new Guna.UI2.WinForms.Guna2CheckBox();
             inNumberCheck = new Guna.UI2.WinForms.Guna2CheckBox();
             itemGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             addInvoice = new Guna.UI2.WinForms.Guna2Button();
+            backButton = new Guna.UI2.WinForms.Guna2Button();
+            addUser = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            guna2GroupBox1.SuspendLayout();
+            incommingGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)itemGrid).BeginInit();
             SuspendLayout();
             // 
@@ -126,6 +132,7 @@
             incommingTab.Size = new Size(210, 59);
             incommingTab.TabIndex = 2;
             incommingTab.Text = "Incomming Invoices";
+            incommingTab.Click += incommingTab_Click;
             // 
             // outcommingTab
             // 
@@ -149,47 +156,49 @@
             outcommingTab.TabIndex = 3;
             outcommingTab.Text = "Outcomming Invoices";
             // 
-            // Users
+            // usersTab
             // 
-            Users.Anchor = AnchorStyles.Top;
-            Users.CheckedState.BorderColor = Color.Black;
-            Users.CheckedState.FillColor = Color.MidnightBlue;
-            Users.CheckedState.ForeColor = Color.White;
-            Users.CustomizableEdges = customizableEdges7;
-            Users.DisabledState.BorderColor = Color.DarkGray;
-            Users.DisabledState.CustomBorderColor = Color.DarkGray;
-            Users.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            Users.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            Users.FillColor = Color.AliceBlue;
-            Users.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
-            Users.ForeColor = Color.Black;
-            Users.Location = new Point(797, 166);
-            Users.Margin = new Padding(3, 4, 3, 4);
-            Users.Name = "Users";
-            Users.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            Users.Size = new Size(210, 59);
-            Users.TabIndex = 4;
-            Users.Text = "Users";
+            usersTab.Anchor = AnchorStyles.Top;
+            usersTab.CheckedState.BorderColor = Color.Black;
+            usersTab.CheckedState.FillColor = Color.MidnightBlue;
+            usersTab.CheckedState.ForeColor = Color.White;
+            usersTab.CustomizableEdges = customizableEdges7;
+            usersTab.DisabledState.BorderColor = Color.DarkGray;
+            usersTab.DisabledState.CustomBorderColor = Color.DarkGray;
+            usersTab.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            usersTab.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            usersTab.FillColor = Color.AliceBlue;
+            usersTab.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
+            usersTab.ForeColor = Color.Black;
+            usersTab.Location = new Point(797, 166);
+            usersTab.Margin = new Padding(3, 4, 3, 4);
+            usersTab.Name = "usersTab";
+            usersTab.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            usersTab.Size = new Size(210, 59);
+            usersTab.TabIndex = 4;
+            usersTab.Text = "Users";
+            usersTab.CheckedChanged += Users_CheckedChanged;
+            usersTab.Click += Users_Click;
             // 
-            // guna2GroupBox1
+            // incommingGroup
             // 
-            guna2GroupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            guna2GroupBox1.BorderColor = Color.FromArgb(64, 64, 64);
-            guna2GroupBox1.Controls.Add(inItemCombo);
-            guna2GroupBox1.Controls.Add(incommingNummberTextBox);
-            guna2GroupBox1.Controls.Add(inItemCheck);
-            guna2GroupBox1.Controls.Add(inNumberCheck);
-            guna2GroupBox1.CustomBorderColor = Color.Goldenrod;
-            guna2GroupBox1.CustomizableEdges = customizableEdges13;
-            guna2GroupBox1.Font = new Font("Segoe UI", 14.2641506F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            guna2GroupBox1.ForeColor = Color.Navy;
-            guna2GroupBox1.Location = new Point(14, 259);
-            guna2GroupBox1.Margin = new Padding(3, 4, 3, 4);
-            guna2GroupBox1.Name = "guna2GroupBox1";
-            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2GroupBox1.Size = new Size(303, 348);
-            guna2GroupBox1.TabIndex = 6;
-            guna2GroupBox1.Text = "Group by";
+            incommingGroup.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            incommingGroup.BorderColor = Color.FromArgb(64, 64, 64);
+            incommingGroup.Controls.Add(inItemCombo);
+            incommingGroup.Controls.Add(incommingNummberTextBox);
+            incommingGroup.Controls.Add(inItemCheck);
+            incommingGroup.Controls.Add(inNumberCheck);
+            incommingGroup.CustomBorderColor = Color.Goldenrod;
+            incommingGroup.CustomizableEdges = customizableEdges13;
+            incommingGroup.Font = new Font("Segoe UI", 14.2641506F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            incommingGroup.ForeColor = Color.Navy;
+            incommingGroup.Location = new Point(14, 259);
+            incommingGroup.Margin = new Padding(3, 4, 3, 4);
+            incommingGroup.Name = "incommingGroup";
+            incommingGroup.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            incommingGroup.Size = new Size(303, 348);
+            incommingGroup.TabIndex = 6;
+            incommingGroup.Text = "Group by";
             // 
             // inItemCombo
             // 
@@ -357,19 +366,69 @@
             addInvoice.Text = "Add";
             addInvoice.Click += addInvoice_Click;
             // 
+            // backButton
+            // 
+            backButton.Anchor = AnchorStyles.Top;
+            backButton.Checked = true;
+            backButton.CheckedState.BorderColor = Color.Black;
+            backButton.CheckedState.FillColor = Color.MidnightBlue;
+            backButton.CheckedState.ForeColor = Color.White;
+            backButton.CustomizableEdges = customizableEdges17;
+            backButton.DisabledState.BorderColor = Color.DarkGray;
+            backButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            backButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            backButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            backButton.FillColor = Color.AliceBlue;
+            backButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
+            backButton.ForeColor = Color.Black;
+            backButton.Location = new Point(986, 810);
+            backButton.Margin = new Padding(3, 4, 3, 4);
+            backButton.Name = "backButton";
+            backButton.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            backButton.Size = new Size(210, 59);
+            backButton.TabIndex = 9;
+            backButton.Text = "Back";
+            backButton.Click += backButton_Click;
+            // 
+            // addUser
+            // 
+            addUser.Anchor = AnchorStyles.Top;
+            addUser.Checked = true;
+            addUser.CheckedState.BorderColor = Color.Black;
+            addUser.CheckedState.FillColor = Color.MidnightBlue;
+            addUser.CheckedState.ForeColor = Color.White;
+            addUser.CustomizableEdges = customizableEdges19;
+            addUser.DisabledState.BorderColor = Color.DarkGray;
+            addUser.DisabledState.CustomBorderColor = Color.DarkGray;
+            addUser.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            addUser.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            addUser.FillColor = Color.AliceBlue;
+            addUser.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
+            addUser.ForeColor = Color.Black;
+            addUser.Location = new Point(335, 810);
+            addUser.Margin = new Padding(3, 4, 3, 4);
+            addUser.Name = "addUser";
+            addUser.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            addUser.Size = new Size(210, 59);
+            addUser.TabIndex = 10;
+            addUser.Text = "Add";
+            addUser.Click += addUser_Click;
+            // 
             // ownerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
             ClientSize = new Size(1209, 882);
-            Controls.Add(addInvoice);
+            Controls.Add(addUser);
+            Controls.Add(backButton);
             Controls.Add(itemGrid);
-            Controls.Add(guna2GroupBox1);
-            Controls.Add(Users);
+            Controls.Add(incommingGroup);
+            Controls.Add(usersTab);
             Controls.Add(outcommingTab);
             Controls.Add(incommingTab);
             Controls.Add(guna2Panel1);
+            Controls.Add(addInvoice);
             ForeColor = SystemColors.ControlDarkDark;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ownerForm";
@@ -380,8 +439,8 @@
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            guna2GroupBox1.ResumeLayout(false);
-            guna2GroupBox1.PerformLayout();
+            incommingGroup.ResumeLayout(false);
+            incommingGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)itemGrid).EndInit();
             ResumeLayout(false);
         }
@@ -393,13 +452,15 @@
         private PictureBox pictureBox1;
         private Guna.UI2.WinForms.Guna2Button incommingTab;
         private Guna.UI2.WinForms.Guna2Button outcommingTab;
-        private Guna.UI2.WinForms.Guna2Button Users;
-        private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
+        private Guna.UI2.WinForms.Guna2Button usersTab;
+        private Guna.UI2.WinForms.Guna2GroupBox incommingGroup;
         private Guna.UI2.WinForms.Guna2TextBox incommingNummberTextBox;
         private Guna.UI2.WinForms.Guna2CheckBox inItemCheck;
         private Guna.UI2.WinForms.Guna2CheckBox inNumberCheck;
         private Guna.UI2.WinForms.Guna2ComboBox inItemCombo;
         private Guna.UI2.WinForms.Guna2DataGridView itemGrid;
         private Guna.UI2.WinForms.Guna2Button addInvoice;
+        private Guna.UI2.WinForms.Guna2Button backButton;
+        private Guna.UI2.WinForms.Guna2Button addUser;
     }
 }

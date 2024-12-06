@@ -38,6 +38,10 @@ namespace Restaurant
 
         private void ownerForm_Load(object sender, EventArgs e)
         {
+            incommingTab.Checked = true;
+            usersTab.Checked = false;
+            outcommingTab.Checked = false;
+            addUser.Visible = false;
             incommingNummberTextBox.PlaceholderText = "[Incomming Invoice Number]";
             incommingNummberTextBox.PlaceholderForeColor = System.Drawing.Color.LightGray;
 
@@ -296,6 +300,69 @@ namespace Restaurant
         {
             addInvoiceForm addInvoiceForm = new addInvoiceForm();
             addInvoiceForm.ShowDialog();
+        }
+
+        private void Users_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Users_Click(object sender, EventArgs e)
+        {
+            usersTab.Checked = true;
+            if (usersTab.Checked)
+            {
+                incommingTab.Checked = false;
+                addInvoice.Visible = false;
+                incommingGroup.Visible = false;
+                addUser.Visible = true;
+                addInvoice.Visible = false;
+                try
+                {
+                    string s = "SELECT * FROM userTable";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                        itemGrid.Columns[4].Visible = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            var res = MessageBox.Show("Are you realy want to sing out?", "Exit application", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                Form1 form1 = new Form1();
+                form1.Show();
+                this.Hide();
+            }
+        }
+
+        private void incommingTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addUser_Click(object sender, EventArgs e)
+        {
+            addUserForm addUserForm = new addUserForm();
+            addUserForm.Show();
         }
     }
 }
