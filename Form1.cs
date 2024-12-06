@@ -103,12 +103,12 @@ namespace Restaurant
                 {
                     if (password == "12345")
                     {
-                        ownerForm ownerForm = new ownerForm(getPasssword);
+                        ownerForm ownerForm = new ownerForm(password);
                         ownerForm.Show();
                         this.Hide();
                     }
                     else if (password == "0000") {
-                        ordersForm ordersForm = new ordersForm();
+                        ordersForm ordersForm = new ordersForm(password);
                         ordersForm.Show();
                         this.Hide();
                     }

@@ -96,7 +96,7 @@ namespace Restaurant
                         productNameBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     }
                 }
-                
+
                 string s4 = "SELECT * FROM Tables WHERE UserID = @UserID";
                 using (SqlCommand cmd4 = new SqlCommand(s4, conn))
                 {
@@ -111,16 +111,27 @@ namespace Restaurant
                             double price = Convert.ToDouble(reader["Price"]);
                             double total = Convert.ToDouble(reader["Total"]);
 
-                            // Add data to the corresponding table in the dictionary
-                            if (invoiceDictionatry.ContainsKey(tableName))
+                            // Ensure the table exists in invoiceDictionatry
+                            if (!invoiceDictionatry.ContainsKey(tableName))
                             {
-                                invoiceDictionatry[tableName].Rows.Add(product, quantity, price, total);
+                                DataTable invoiceTable = new DataTable();
+                                invoiceTable.Columns.Add("Product", typeof(string));
+                                invoiceTable.Columns.Add("Quantity", typeof(int));
+                                invoiceTable.Columns.Add("Price", typeof(double));
+                                invoiceTable.Columns.Add("Total", typeof(double));
+                                invoiceDictionatry[tableName] = invoiceTable;
+
+                                // Add table to listBox1
+                                listBox1.Items.Add(tableName);
                             }
+
+                            // Add data to the table
+                            invoiceDictionatry[tableName].Rows.Add(product, quantity, price, total);
                         }
                     }
-                    //using (SqlDataAdapter adapter) { }
                 }
-
+                //using (SqlDataAdapter adapter) { }
+            
             }
             catch (Exception ex)
             {
@@ -211,6 +222,7 @@ namespace Restaurant
                 invoiceGrid.DataSource = invoiceTable;
 
             }
+            listBox1.SelectedItem = tableName;
         }
 
         private void productQuantityBox_KeyDown(object sender, KeyEventArgs e)
@@ -313,6 +325,20 @@ namespace Restaurant
 
                     
                     invoiceGrid.DataSource = invoiceTable;
+                    string s2 = @"INSERT INTO Tables (TableName, Product, Quantity, Price, Total, UserID)
+                          VALUES (@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
+                    using (SqlCommand insertCmd = new SqlCommand(s2, conn))
+                    {
+                        insertCmd.Parameters.AddWithValue("@TableName", selectedTable);
+                        insertCmd.Parameters.AddWithValue("@Product", productNameBox.Text);
+                        insertCmd.Parameters.AddWithValue("@Quantity", orderedQ);
+                        insertCmd.Parameters.AddWithValue("@Price", price);
+                        insertCmd.Parameters.AddWithValue("@Total", sum);
+                        insertCmd.Parameters.AddWithValue("@UserID", currentUser);
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+
                     conn.Close();
                     productNameBox.Text = "";
                     productQuantityBox.Text = "";
@@ -390,21 +416,6 @@ namespace Restaurant
                         insert1.ExecuteNonQuery();
                     }
 
-                   /* string s2 = @"INSERT INTO Tables (InvoiceID, TableName, Product, Quantity, Price, Total, UserID)
-                                  VALUES (@InvoiceID,@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
-
-                    using (SqlCommand insert = new SqlCommand(s2, conn))
-                    {
-                        insert.Parameters.AddWithValue("@InvoiceID", iNummber);
-                        insert.Parameters.AddWithValue("@TableName", selectedTable);
-                        insert.Parameters.AddWithValue("@Product", product);
-                        insert.Parameters.AddWithValue("@Quantity", quantity);
-                        insert.Parameters.AddWithValue("@Price", price);
-                        insert.Parameters.AddWithValue("@Total", total);
-                        insert.Parameters.AddWithValue("@UserID", currentUser);
-                        insert.ExecuteNonQuery();
-                    }*/
-
                 }
 
             }
@@ -442,8 +453,10 @@ namespace Restaurant
             }
 
             DataTable table = invoiceDictionatry[selectedTable];
-            invoiceForm invoiceForm = new invoiceForm(table, userNameLabel.Text.ToString(), getNummber());
+            invoiceForm invoiceForm = new invoiceForm(table, userNameLabel.Text.ToString(), getNummber(), selectedTable);
             invoiceForm.ShowDialog();
+            invoiceGrid.DataSource = null;
+            listBox1.Items.Remove(selectedTable);
 
         }
     

@@ -15,9 +15,10 @@ namespace Restaurant
     public partial class ordersForm : Form
     {
         SqlConnection conn = new SqlConnection("Data Source=Grigorov\\SQLEXPRESS;Initial Catalog=restaurantManagment;Integrated Security=True;Encrypt=False;MultipleActiveResultSets=True");
-        
-        public ordersForm()
+        string password;
+        public ordersForm(string password)
         {
+            this.password = password;
            InitializeComponent();
         }
 
@@ -44,8 +45,17 @@ namespace Restaurant
                         orderGridView.DataSource = dt;
                     }
                 }
-
+                using (SqlCommand loadName = new SqlCommand("SELECT * FROM userTable WHERE password = @password", conn)) {
+                    loadName.Parameters.AddWithValue("@password", password);
+                    using (SqlDataReader reader = loadName.ExecuteReader()) {
+                        if (reader.Read()) { 
+                            userNameLabel .Text = reader.GetString(0) + reader.GetString(1);
+                        }
+                    }
+                }
             }
+
+
             catch (Exception ex)
             {
 

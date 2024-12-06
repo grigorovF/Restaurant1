@@ -20,16 +20,18 @@ namespace Restaurant
         int yoffset = 0;
         double totalSum = 0;
         public string inNumber;
-        public invoiceForm(DataTable invoiceTable, string waiter, string inNumber)
+        public string selectedTable;
+        public invoiceForm(DataTable invoiceTable, string waiter, string inNumber, string selectedTable)
         {
             this.inNumber = inNumber;
             this.invoiceTable = invoiceTable;
             this.waiter = waiter;
             this.ControlBox = true;
+            this.selectedTable = selectedTable;
             InitializeComponent();
         }
 
-        
+
 
 
         protected override void OnPaint(PaintEventArgs e)
@@ -47,7 +49,7 @@ namespace Restaurant
 
         }
 
-        
+
 
         private void invoiceForm_Load(object sender, EventArgs e)
         {
@@ -206,83 +208,72 @@ namespace Restaurant
 
         private void invoiceForm_FormClosing_1(object sender, FormClosingEventArgs e)
         {
-            try
+            var result = MessageBox.Show("Do you want to delete this table after printing?", "Delete Table", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                conn.Open();
-                using (SqlTransaction transaction = conn.BeginTransaction())
+                try
                 {
-                    try
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
                     {
-                        
-                        string s1 = "INSERT INTO outcommingInvoices (invoiceNumber, Waiter, Date) VALUES (@invoiceNumber, @Waiter, @Date)";
-                        using (SqlCommand cmd1 = new SqlCommand(s1, conn, transaction))
+                        try
                         {
-                            cmd1.Parameters.AddWithValue("@invoiceNumber", inNumber);
-                            cmd1.Parameters.AddWithValue("@Waiter", waiter);
-                            cmd1.Parameters.AddWithValue("@Date", DateTime.Now);
-                            cmd1.ExecuteNonQuery();
-                            MessageBox.Show("Invoice is stored!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
 
-                        // Insert into outcommingProducts
-                        string s2 = "INSERT INTO outcommingProducts (invoiceNumber, Product, Quantity, Price, Total) VALUES (@invoiceNumber, @Product, @Quantity, @Price, @Total)";
-                        foreach (DataRow row in invoiceTable.Rows)
-                        {
-                            using (SqlCommand cmd2 = new SqlCommand(s2, conn, transaction))
+                            string s1 = "INSERT INTO outcommingInvoices (invoiceNumber, Waiter, Date) VALUES (@invoiceNumber, @Waiter, @Date)";
+                            using (SqlCommand cmd1 = new SqlCommand(s1, conn, transaction))
                             {
-                                cmd2.Parameters.AddWithValue("@invoiceNumber", inNumber);
-                                cmd2.Parameters.AddWithValue("@Product", row["Product"].ToString());
-                                cmd2.Parameters.AddWithValue("@Quantity", Convert.ToInt32(row["Quantity"]));
-                                cmd2.Parameters.AddWithValue("@Price", Convert.ToDecimal(row["Price"]));
-                                cmd2.Parameters.AddWithValue("@Total", Convert.ToDecimal(row["Total"]));
-                                cmd2.ExecuteNonQuery();
+                                cmd1.Parameters.AddWithValue("@invoiceNumber", inNumber);
+                                cmd1.Parameters.AddWithValue("@Waiter", waiter);
+                                cmd1.Parameters.AddWithValue("@Date", DateTime.Now);
+                                cmd1.ExecuteNonQuery();
+                                //MessageBox.Show("Invoice is stored!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
+
+                            // Insert into outcommingProducts
+                            string s2 = "INSERT INTO outcommingProducts (invoiceNumber, Product, Quantity, Price, Total) VALUES (@invoiceNumber, @Product, @Quantity, @Price, @Total)";
+                            foreach (DataRow row in invoiceTable.Rows)
+                            {
+                                using (SqlCommand cmd2 = new SqlCommand(s2, conn, transaction))
+                                {
+                                    cmd2.Parameters.AddWithValue("@invoiceNumber", inNumber);
+                                    cmd2.Parameters.AddWithValue("@Product", row["Product"].ToString());
+                                    cmd2.Parameters.AddWithValue("@Quantity", Convert.ToInt32(row["Quantity"]));
+                                    cmd2.Parameters.AddWithValue("@Price", Convert.ToDecimal(row["Price"]));
+                                    cmd2.Parameters.AddWithValue("@Total", Convert.ToDecimal(row["Total"]));
+                                    cmd2.ExecuteNonQuery();
+                                }
+                            }
+                            transaction.Commit();
+                            //MessageBox.Show("Products are stored!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        transaction.Commit();
-                        MessageBox.Show("Products are stored!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        catch (SqlException sqlEx)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("SQL Error: " + sqlEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch (SqlException sqlEx)
-                    {
-                        transaction.Rollback();
-                        MessageBox.Show("SQL Error: " + sqlEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string deleteString = "DELETE FROM Tables WHERE TableName = @TableName";
+                    using (SqlCommand delete = new SqlCommand(deleteString, conn)) {
+                        delete.Parameters.AddWithValue("@TableName", selectedTable);
+                        delete.ExecuteNonQuery();
+                        
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    
+                    conn.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            /*  var result = MessageBox.Show("Do you want to delete this table after printing?", "Delete Table", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-      if (result == DialogResult.Yes)
-      {
-          // Remove from listBox1
-          listBox1.Items.Remove(selectedTable);
-
-          // Remove from dictionaries
-          if (orderDictionary.ContainsKey(selectedTable))
-          {
-              orderDictionary.Remove(selectedTable);
-          }
-          if (orderDictionatry.ContainsKey(selectedTable))
-          {
-              orderDictionatry.Remove(selectedTable);
-          }
-
-          MessageBox.Show("Table removed successfully.", "Table Removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-          else
-          {
-              MessageBox.Show("Please select a table to generate an invoice.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-          }*/
         }
     }
 }
