@@ -118,12 +118,12 @@
             contextMenuStrip1.ImageScalingSize = new Size(18, 18);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { makeOrderToolStripMenuItem, makeInvoiceToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(193, 76);
+            contextMenuStrip1.Size = new Size(166, 52);
             // 
             // makeOrderToolStripMenuItem
             // 
             makeOrderToolStripMenuItem.Name = "makeOrderToolStripMenuItem";
-            makeOrderToolStripMenuItem.Size = new Size(192, 24);
+            makeOrderToolStripMenuItem.Size = new Size(165, 24);
             makeOrderToolStripMenuItem.Text = "Make Order";
             makeOrderToolStripMenuItem.Click += makeOrderToolStripMenuItem_Click;
             // 
@@ -131,19 +131,19 @@
             // 
             makeInvoiceToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { separatelyToolStripMenuItem, totalToolStripMenuItem });
             makeInvoiceToolStripMenuItem.Name = "makeInvoiceToolStripMenuItem";
-            makeInvoiceToolStripMenuItem.Size = new Size(192, 24);
+            makeInvoiceToolStripMenuItem.Size = new Size(165, 24);
             makeInvoiceToolStripMenuItem.Text = "Make Invoice";
             // 
             // separatelyToolStripMenuItem
             // 
             separatelyToolStripMenuItem.Name = "separatelyToolStripMenuItem";
-            separatelyToolStripMenuItem.Size = new Size(198, 24);
+            separatelyToolStripMenuItem.Size = new Size(154, 24);
             separatelyToolStripMenuItem.Text = "Separately";
             // 
             // totalToolStripMenuItem
             // 
             totalToolStripMenuItem.Name = "totalToolStripMenuItem";
-            totalToolStripMenuItem.Size = new Size(198, 24);
+            totalToolStripMenuItem.Size = new Size(154, 24);
             totalToolStripMenuItem.Text = "Total";
             totalToolStripMenuItem.Click += totalToolStripMenuItem_Click;
             // 
@@ -296,13 +296,13 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             orderGrid.DefaultCellStyle = dataGridViewCellStyle3;
             orderGrid.GridColor = Color.FromArgb(231, 229, 255);
-            orderGrid.Location = new Point(66, 416);
+            orderGrid.Location = new Point(14, 355);
             orderGrid.Margin = new Padding(3, 4, 3, 4);
             orderGrid.Name = "orderGrid";
             orderGrid.RowHeadersVisible = false;
             orderGrid.RowHeadersWidth = 45;
             orderGrid.RowTemplate.Height = 27;
-            orderGrid.Size = new Size(741, 195);
+            orderGrid.Size = new Size(909, 195);
             orderGrid.TabIndex = 12;
             orderGrid.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             orderGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -397,7 +397,7 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             invoiceGrid.DefaultCellStyle = dataGridViewCellStyle6;
             invoiceGrid.GridColor = Color.FromArgb(231, 229, 255);
-            invoiceGrid.Location = new Point(10, 214);
+            invoiceGrid.Location = new Point(7, 205);
             invoiceGrid.Margin = new Padding(3, 4, 3, 4);
             invoiceGrid.Name = "invoiceGrid";
             invoiceGrid.ReadOnly = true;
@@ -450,8 +450,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
             ClientSize = new Size(1230, 764);
-            Controls.Add(invoiceGrid);
             Controls.Add(orderGrid);
+            Controls.Add(invoiceGrid);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(addTableButton);
             Controls.Add(productQuantityBox);

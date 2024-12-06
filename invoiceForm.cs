@@ -213,9 +213,7 @@ namespace Restaurant
                 {
                     try
                     {
-                        if (inNumber == null) {
-                            MessageBox.Show("HERE");
-                        }
+                        
                         string s1 = "INSERT INTO outcommingInvoices (invoiceNumber, Waiter, Date) VALUES (@invoiceNumber, @Waiter, @Date)";
                         using (SqlCommand cmd1 = new SqlCommand(s1, conn, transaction))
                         {
@@ -232,7 +230,7 @@ namespace Restaurant
                         {
                             using (SqlCommand cmd2 = new SqlCommand(s2, conn, transaction))
                             {
-                                cmd2.Parameters.AddWithValue("@invoiceNumber", inNumber); 
+                                cmd2.Parameters.AddWithValue("@invoiceNumber", inNumber);
                                 cmd2.Parameters.AddWithValue("@Product", row["Product"].ToString());
                                 cmd2.Parameters.AddWithValue("@Quantity", Convert.ToInt32(row["Quantity"]));
                                 cmd2.Parameters.AddWithValue("@Price", Convert.ToDecimal(row["Price"]));
@@ -240,21 +238,16 @@ namespace Restaurant
                                 cmd2.ExecuteNonQuery();
                             }
                         }
-
-
-                        // Commit transaction
                         transaction.Commit();
                         MessageBox.Show("Products are stored!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (SqlException sqlEx)
                     {
-                        // Rollback transaction in case of SQL error
                         transaction.Rollback();
                         MessageBox.Show("SQL Error: " + sqlEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (Exception ex)
                     {
-                        // Rollback transaction in case of other errors
                         transaction.Rollback();
                         MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -268,6 +261,28 @@ namespace Restaurant
             {
                 conn.Close();
             }
+
+            /*  var result = MessageBox.Show("Do you want to delete this table after printing?", "Delete Table", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+      if (result == DialogResult.Yes)
+      {
+          // Remove from listBox1
+          listBox1.Items.Remove(selectedTable);
+
+          // Remove from dictionaries
+          if (orderDictionary.ContainsKey(selectedTable))
+          {
+              orderDictionary.Remove(selectedTable);
+          }
+          if (orderDictionatry.ContainsKey(selectedTable))
+          {
+              orderDictionatry.Remove(selectedTable);
+          }
+
+          MessageBox.Show("Table removed successfully.", "Table Removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          else
+          {
+              MessageBox.Show("Please select a table to generate an invoice.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+          }*/
         }
     }
 }

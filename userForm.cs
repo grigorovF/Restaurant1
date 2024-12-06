@@ -20,23 +20,15 @@ namespace Restaurant
         private Dictionary<string, DataTable> invoiceDictionatry = new Dictionary<string, DataTable>();
         DataTable orderTable = new DataTable();
 
+        string password;
         string iNummber;
         private string currentUser;
         private Dictionary<string, List<string>> userTables = new Dictionary<string, List<string>>();
-        string password;
 
-        public userForm(string password)
-        {
+        public userForm(string password) {
             this.password = password;
-            this.MinimumSize = new Size(141, 23);
-            orderTable.Columns.Add("Product", Type.GetType("System.String"));
-            orderTable.Columns.Add("Quantity", Type.GetType("System.Int32"));
-            orderTable.Columns.Add("Price", Type.GetType("System.Double"));
-            orderTable.Columns.Add("Total", Type.GetType("System.Double"));
             InitializeComponent();
         }
-
-
         private string getNummber()
         {
             HashSet<int> list = new HashSet<int>();
@@ -104,27 +96,8 @@ namespace Restaurant
                         productNameBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     }
                 }
-                string s3 = "SELECT DISTINCT TableName FROM Tables WHERE UserID = @UserID";
-                using (SqlCommand cmd3 = new SqlCommand(s3, conn))
-                {
-                    cmd3.Parameters.AddWithValue("@UserID", currentUser);
-                    using (SqlDataReader reader = cmd3.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string tableName = reader["TableName"].ToString();
-                            listBox1.Items.Add(tableName);
-                            DataTable invoiceTable = new DataTable();
-                            invoiceTable.Columns.Add("Product", typeof(string));
-                            invoiceTable.Columns.Add("Quantity", typeof(int));
-                            invoiceTable.Columns.Add("Price", typeof(double));
-                            invoiceTable.Columns.Add("Total", typeof(double));
-
-                            invoiceDictionatry[tableName] = invoiceTable;
-                        }
-                    }
-                }
-                string s4 = "SELECT TableName, Product, Quantity, Price, Total FROM Tables WHERE UserID = @UserID";
+                
+                string s4 = "SELECT * FROM Tables WHERE UserID = @UserID";
                 using (SqlCommand cmd4 = new SqlCommand(s4, conn))
                 {
                     cmd4.Parameters.AddWithValue("@UserID", currentUser);
@@ -145,6 +118,7 @@ namespace Restaurant
                             }
                         }
                     }
+                    //using (SqlDataAdapter adapter) { }
                 }
 
             }
@@ -337,8 +311,7 @@ namespace Restaurant
                         invoiceTable.Rows.Add(productNameBox.Text, orderedQ, price, sum);
                     }
 
-
-
+                    
                     invoiceGrid.DataSource = invoiceTable;
                     conn.Close();
                     productNameBox.Text = "";
@@ -417,7 +390,7 @@ namespace Restaurant
                         insert1.ExecuteNonQuery();
                     }
 
-                    string s2 = @"INSERT INTO Tables (InvoiceID, TableName, Product, Quantity, Price, Total, UserID)
+                   /* string s2 = @"INSERT INTO Tables (InvoiceID, TableName, Product, Quantity, Price, Total, UserID)
                                   VALUES (@InvoiceID,@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
 
                     using (SqlCommand insert = new SqlCommand(s2, conn))
@@ -430,7 +403,7 @@ namespace Restaurant
                         insert.Parameters.AddWithValue("@Total", total);
                         insert.Parameters.AddWithValue("@UserID", currentUser);
                         insert.ExecuteNonQuery();
-                    }
+                    }*/
 
                 }
 
@@ -472,27 +445,6 @@ namespace Restaurant
             invoiceForm invoiceForm = new invoiceForm(table, userNameLabel.Text.ToString(), getNummber());
             invoiceForm.ShowDialog();
 
-            /*  var result = MessageBox.Show("Do you want to delete this table after printing?", "Delete Table", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        if (result == DialogResult.Yes)
-        {
-            // Remove from listBox1
-            listBox1.Items.Remove(selectedTable);
-
-            // Remove from dictionaries
-            if (orderDictionary.ContainsKey(selectedTable))
-            {
-                orderDictionary.Remove(selectedTable);
-            }
-            if (orderDictionatry.ContainsKey(selectedTable))
-            {
-                orderDictionatry.Remove(selectedTable);
-            }
-
-            MessageBox.Show("Table removed successfully.", "Table Removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else
-            {
-                MessageBox.Show("Please select a table to generate an invoice.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }*/
         }
     
 
