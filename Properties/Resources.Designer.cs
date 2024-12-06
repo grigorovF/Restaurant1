@@ -73,6 +73,16 @@ namespace Restaurant.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap green_tick_icon_0 {
+            get {
+                object obj = ResourceManager.GetObject("green-tick-icon-0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_d_image_of_a_man_with_hat_in_black_and_white_png_image_15764275 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-d-image-of-a-man-with-hat-in-black-and-white-png-image_15764275", resourceCulture);

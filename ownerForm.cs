@@ -38,6 +38,9 @@ namespace Restaurant
 
         private void ownerForm_Load(object sender, EventArgs e)
         {
+            incommingNummberTextBox.PlaceholderText = "[Incomming Invoice Number]";
+            incommingNummberTextBox.PlaceholderForeColor = System.Drawing.Color.LightGray;
+
             try
             {
                 conn.Open();
@@ -91,12 +94,19 @@ namespace Restaurant
                 try
                 {
                     conn.Open();
-                    string select = "SELECT * FROM InboundInvoices";
-                    using (SqlCommand cmd = new SqlCommand(select, conn)) {
-                        using (SqlDataReader reader = cmd.ExecuteReader()) {
-                            while (reader.Read()) {
-                                inItemCombo.Items.Add(reader.GetString(0));
+                    string load = "SELECT * FROM InboundInvoices";
+                    AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+                    using (SqlCommand loadInv = new SqlCommand(load, conn))
+                    {
+                        using (SqlDataReader reader = loadInv.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(reader["invoiceNumber"].ToString().Trim());
                             }
+                            incommingNummberTextBox.AutoCompleteCustomSource = collection;
+                            incommingNummberTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                            incommingNummberTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
                         }
                     }
                 }
@@ -115,9 +125,21 @@ namespace Restaurant
             {
                 incommingNummberTextBox.Enabled = false;
                 incommingNummberTextBox.Text = null;
-                try {
-                    conn.Open();
-                    itemGridDefault();
+                incommingNummberTextBox.PlaceholderText = "[Incomming Invoice Number]";
+                incommingNummberTextBox.PlaceholderForeColor = System.Drawing.Color.LightGray;
+                try
+                {
+                    string s = "SELECT * FROM itemTable";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -133,7 +155,147 @@ namespace Restaurant
 
         private void inItemCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                conn.Open();
+                if (inItemCombo.SelectedIndex >= 0)
+                {
+                    string s = "SELECT * FROM itemTable WHERE iNumber = @invoiceNumber AND Product = @Product";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoiceNumber", incommingNummberTextBox.Text);
+                        cmd.Parameters.AddWithValue("@Product", inItemCombo.SelectedItem.ToString());
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
+                }
+                else
+                {
+                    inItemCombo.Enabled = false;
+                    string s = "SELECT * FROM itemTable WHERE iNumber = @invoiceNumber";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoiceNumber", incommingNummberTextBox.Text);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void incommingNummberTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (incommingNummberTextBox.Text != null)
+            {
+                try
+                {
+                    conn.Open();
+                    string s = "SELECT * FROM itemTable WHERE iNumber = @invoiceNumber";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoiceNumber", incommingNummberTextBox.Text);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void inItemCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (inItemCheck.Checked)
+            {
+                inItemCombo.Enabled = true;
+                try
+                {
+                    conn.Open();
+                    string s = "SELECT * FROM itemTable WHERE iNumber = @invoiceNumber";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoiceNumber", incommingNummberTextBox.Text);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                inItemCombo.Items.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            else
+            {
+                inItemCombo.Enabled = false;
+                inItemCombo.Items.Clear();
+                try
+                {
+                    string s = "SELECT * FROM itemTable WHERE iNumber = @invoiceNumber";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoiceNumber", incommingNummberTextBox.Text);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void addInvoice_Click(object sender, EventArgs e)
+        {
+            addInvoiceForm addInvoiceForm = new addInvoiceForm();
+            addInvoiceForm.ShowDialog();
         }
     }
 }
