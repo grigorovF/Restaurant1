@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
@@ -90,7 +91,7 @@ namespace Restaurant
 
 
 
-        
+
 
         private void guna2TextBox5_TextChanged(object sender, EventArgs e)
         {
@@ -119,5 +120,22 @@ namespace Restaurant
                 paswordLabel.Visible = false;
             }
         }
+
+        private void guna2TextBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        bool IsValidEmail(string email)
+        {
+            return Regex.IsMatch(email, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*@((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))\z");
+        }
+
+        private void guna2TextBox3_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.ToString();
+        }
     }
+
+
 }
