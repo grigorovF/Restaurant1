@@ -252,6 +252,7 @@
             productQuantityBox.Size = new Size(160, 53);
             productQuantityBox.TabIndex = 10;
             productQuantityBox.KeyDown += productQuantityBox_KeyDown;
+            productQuantityBox.KeyPress += productQuantityBox_KeyPress;
             // 
             // addTableButton
             // 

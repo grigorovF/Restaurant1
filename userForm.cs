@@ -25,7 +25,8 @@ namespace Restaurant
         private string currentUser;
         private Dictionary<string, List<string>> userTables = new Dictionary<string, List<string>>();
 
-        public userForm(string password) {
+        public userForm(string password)
+        {
             this.password = password;
             InitializeComponent();
         }
@@ -131,7 +132,7 @@ namespace Restaurant
                     }
                 }
                 //using (SqlDataAdapter adapter) { }
-            
+
             }
             catch (Exception ex)
             {
@@ -323,7 +324,7 @@ namespace Restaurant
                         invoiceTable.Rows.Add(productNameBox.Text, orderedQ, price, sum);
                     }
 
-                    
+
                     invoiceGrid.DataSource = invoiceTable;
                     string s2 = @"INSERT INTO Tables (TableName, Product, Quantity, Price, Total, UserID)
                           VALUES (@TableName, @Product, @Quantity, @Price, @Total, @UserID)";
@@ -459,7 +460,7 @@ namespace Restaurant
             listBox1.Items.Remove(selectedTable);
 
         }
-    
+
 
 
         private void invoiceGrid_KeyDown(object sender, KeyEventArgs e)
@@ -579,7 +580,17 @@ namespace Restaurant
             {
                 MessageBox.Show("Please select table", "Error deleting product", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
+        }
+
+        private void productQuantityBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("For quantity, enter only nummbers!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
+
+            }
         }
     }
 }
