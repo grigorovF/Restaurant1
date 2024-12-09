@@ -43,15 +43,25 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             label1 = new Label();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             pictureBox1 = new PictureBox();
@@ -63,13 +73,32 @@
             incommingNummberTextBox = new Guna.UI2.WinForms.Guna2TextBox();
             inItemCheck = new Guna.UI2.WinForms.Guna2CheckBox();
             inNumberCheck = new Guna.UI2.WinForms.Guna2CheckBox();
-            itemGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             addInvoice = new Guna.UI2.WinForms.Guna2Button();
             backButton = new Guna.UI2.WinForms.Guna2Button();
             addUser = new Guna.UI2.WinForms.Guna2Button();
+            guna2CheckBox2 = new Guna.UI2.WinForms.Guna2CheckBox();
+            waiterCheck = new Guna.UI2.WinForms.Guna2CheckBox();
+            outcommingInvoiceBox = new Guna.UI2.WinForms.Guna2TextBox();
+            waiterCombo = new Guna.UI2.WinForms.Guna2ComboBox();
+            dateCheck = new Guna.UI2.WinForms.Guna2CheckBox();
+            outcommingGroup = new Guna.UI2.WinForms.Guna2GroupBox();
+            guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            waiterLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            dateLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            itemGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             incommingGroup.SuspendLayout();
+            outcommingGroup.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)itemGrid).BeginInit();
             SuspendLayout();
             // 
@@ -125,7 +154,7 @@
             incommingTab.FillColor = Color.AliceBlue;
             incommingTab.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             incommingTab.ForeColor = Color.Black;
-            incommingTab.Location = new Point(197, 166);
+            incommingTab.Location = new Point(193, 166);
             incommingTab.Margin = new Padding(3, 4, 3, 4);
             incommingTab.Name = "incommingTab";
             incommingTab.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -155,6 +184,7 @@
             outcommingTab.Size = new Size(210, 59);
             outcommingTab.TabIndex = 3;
             outcommingTab.Text = "Outcomming Invoices";
+            outcommingTab.Click += outcommingTab_Click;
             // 
             // usersTab
             // 
@@ -182,7 +212,7 @@
             // 
             // incommingGroup
             // 
-            incommingGroup.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            incommingGroup.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             incommingGroup.BorderColor = Color.FromArgb(64, 64, 64);
             incommingGroup.Controls.Add(inItemCombo);
             incommingGroup.Controls.Add(incommingNummberTextBox);
@@ -192,11 +222,11 @@
             incommingGroup.CustomizableEdges = customizableEdges13;
             incommingGroup.Font = new Font("Segoe UI", 14.2641506F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             incommingGroup.ForeColor = Color.Navy;
-            incommingGroup.Location = new Point(14, 259);
+            incommingGroup.Location = new Point(14, 286);
             incommingGroup.Margin = new Padding(3, 4, 3, 4);
             incommingGroup.Name = "incommingGroup";
             incommingGroup.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            incommingGroup.Size = new Size(303, 348);
+            incommingGroup.Size = new Size(303, 295);
             incommingGroup.TabIndex = 6;
             incommingGroup.Text = "Group by";
             // 
@@ -212,7 +242,7 @@
             inItemCombo.Font = new Font("Segoe UI", 10F);
             inItemCombo.ForeColor = Color.FromArgb(68, 88, 112);
             inItemCombo.ItemHeight = 30;
-            inItemCombo.Location = new Point(21, 259);
+            inItemCombo.Location = new Point(20, 216);
             inItemCombo.Margin = new Padding(3, 4, 3, 4);
             inItemCombo.Name = "inItemCombo";
             inItemCombo.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -232,7 +262,7 @@
             incommingNummberTextBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             incommingNummberTextBox.Font = new Font("Segoe UI", 9F);
             incommingNummberTextBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            incommingNummberTextBox.Location = new Point(21, 121);
+            incommingNummberTextBox.Location = new Point(20, 106);
             incommingNummberTextBox.Margin = new Padding(3, 4, 3, 4);
             incommingNummberTextBox.Name = "incommingNummberTextBox";
             incommingNummberTextBox.PasswordChar = '\0';
@@ -251,7 +281,7 @@
             inItemCheck.CheckedState.BorderRadius = 0;
             inItemCheck.CheckedState.BorderThickness = 0;
             inItemCheck.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            inItemCheck.Location = new Point(21, 212);
+            inItemCheck.Location = new Point(20, 174);
             inItemCheck.Margin = new Padding(3, 4, 3, 4);
             inItemCheck.Name = "inItemCheck";
             inItemCheck.Size = new Size(77, 34);
@@ -285,6 +315,348 @@
             inNumberCheck.UseVisualStyleBackColor = false;
             inNumberCheck.CheckedChanged += inNumberCheck_CheckedChanged;
             // 
+            // addInvoice
+            // 
+            addInvoice.Anchor = AnchorStyles.Top;
+            addInvoice.Checked = true;
+            addInvoice.CheckedState.BorderColor = Color.Black;
+            addInvoice.CheckedState.FillColor = Color.MidnightBlue;
+            addInvoice.CheckedState.ForeColor = Color.White;
+            addInvoice.CustomizableEdges = customizableEdges15;
+            addInvoice.DisabledState.BorderColor = Color.DarkGray;
+            addInvoice.DisabledState.CustomBorderColor = Color.DarkGray;
+            addInvoice.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            addInvoice.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            addInvoice.FillColor = Color.AliceBlue;
+            addInvoice.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
+            addInvoice.ForeColor = Color.Black;
+            addInvoice.Location = new Point(335, 837);
+            addInvoice.Margin = new Padding(3, 4, 3, 4);
+            addInvoice.Name = "addInvoice";
+            addInvoice.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            addInvoice.Size = new Size(210, 59);
+            addInvoice.TabIndex = 8;
+            addInvoice.Text = "Add";
+            addInvoice.Click += addInvoice_Click;
+            // 
+            // backButton
+            // 
+            backButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            backButton.Checked = true;
+            backButton.CheckedState.BorderColor = Color.Black;
+            backButton.CheckedState.FillColor = Color.MidnightBlue;
+            backButton.CheckedState.ForeColor = Color.White;
+            backButton.CustomizableEdges = customizableEdges17;
+            backButton.DisabledState.BorderColor = Color.DarkGray;
+            backButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            backButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            backButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            backButton.FillColor = Color.AliceBlue;
+            backButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
+            backButton.ForeColor = Color.Black;
+            backButton.Location = new Point(986, 837);
+            backButton.Margin = new Padding(3, 4, 3, 4);
+            backButton.Name = "backButton";
+            backButton.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            backButton.Size = new Size(210, 59);
+            backButton.TabIndex = 9;
+            backButton.Text = "Back";
+            backButton.Click += backButton_Click;
+            // 
+            // addUser
+            // 
+            addUser.Anchor = AnchorStyles.Right;
+            addUser.Checked = true;
+            addUser.CheckedState.BorderColor = Color.Black;
+            addUser.CheckedState.FillColor = Color.MidnightBlue;
+            addUser.CheckedState.ForeColor = Color.White;
+            addUser.CustomizableEdges = customizableEdges19;
+            addUser.DisabledState.BorderColor = Color.DarkGray;
+            addUser.DisabledState.CustomBorderColor = Color.DarkGray;
+            addUser.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            addUser.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            addUser.FillColor = Color.AliceBlue;
+            addUser.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
+            addUser.ForeColor = Color.Black;
+            addUser.Location = new Point(335, 837);
+            addUser.Margin = new Padding(3, 4, 3, 4);
+            addUser.Name = "addUser";
+            addUser.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            addUser.Size = new Size(210, 59);
+            addUser.TabIndex = 10;
+            addUser.Text = "Add";
+            addUser.Click += addUser_Click;
+            // 
+            // guna2CheckBox2
+            // 
+            guna2CheckBox2.AutoSize = true;
+            guna2CheckBox2.BackColor = Color.White;
+            guna2CheckBox2.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2CheckBox2.CheckedState.BorderRadius = 0;
+            guna2CheckBox2.CheckedState.BorderThickness = 0;
+            guna2CheckBox2.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            guna2CheckBox2.Location = new Point(21, 64);
+            guna2CheckBox2.Margin = new Padding(3, 4, 3, 4);
+            guna2CheckBox2.Name = "guna2CheckBox2";
+            guna2CheckBox2.Size = new Size(103, 34);
+            guna2CheckBox2.TabIndex = 0;
+            guna2CheckBox2.Text = "Invoice";
+            guna2CheckBox2.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            guna2CheckBox2.UncheckedState.BorderRadius = 0;
+            guna2CheckBox2.UncheckedState.BorderThickness = 0;
+            guna2CheckBox2.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            guna2CheckBox2.UseVisualStyleBackColor = false;
+            guna2CheckBox2.CheckedChanged += guna2CheckBox2_CheckedChanged;
+            // 
+            // waiterCheck
+            // 
+            waiterCheck.AutoSize = true;
+            waiterCheck.BackColor = Color.White;
+            waiterCheck.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            waiterCheck.CheckedState.BorderRadius = 0;
+            waiterCheck.CheckedState.BorderThickness = 0;
+            waiterCheck.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            waiterCheck.Location = new Point(21, 174);
+            waiterCheck.Margin = new Padding(3, 4, 3, 4);
+            waiterCheck.Name = "waiterCheck";
+            waiterCheck.Size = new Size(99, 34);
+            waiterCheck.TabIndex = 1;
+            waiterCheck.Text = "Waiter";
+            waiterCheck.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            waiterCheck.UncheckedState.BorderRadius = 0;
+            waiterCheck.UncheckedState.BorderThickness = 0;
+            waiterCheck.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            waiterCheck.UseVisualStyleBackColor = false;
+            waiterCheck.CheckedChanged += waiterCheck_CheckedChanged;
+            // 
+            // outcommingInvoiceBox
+            // 
+            outcommingInvoiceBox.CustomizableEdges = customizableEdges21;
+            outcommingInvoiceBox.DefaultText = "";
+            outcommingInvoiceBox.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            outcommingInvoiceBox.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            outcommingInvoiceBox.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            outcommingInvoiceBox.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            outcommingInvoiceBox.Enabled = false;
+            outcommingInvoiceBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            outcommingInvoiceBox.Font = new Font("Segoe UI", 9F);
+            outcommingInvoiceBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            outcommingInvoiceBox.Location = new Point(21, 110);
+            outcommingInvoiceBox.Margin = new Padding(3, 4, 3, 4);
+            outcommingInvoiceBox.Name = "outcommingInvoiceBox";
+            outcommingInvoiceBox.PasswordChar = '\0';
+            outcommingInvoiceBox.PlaceholderText = "";
+            outcommingInvoiceBox.SelectedText = "";
+            outcommingInvoiceBox.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            outcommingInvoiceBox.Size = new Size(253, 42);
+            outcommingInvoiceBox.TabIndex = 2;
+            outcommingInvoiceBox.TextChanged += outcommingInvoiceBox_TextChanged;
+            // 
+            // waiterCombo
+            // 
+            waiterCombo.BackColor = Color.Transparent;
+            waiterCombo.CustomizableEdges = customizableEdges23;
+            waiterCombo.DrawMode = DrawMode.OwnerDrawFixed;
+            waiterCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            waiterCombo.Enabled = false;
+            waiterCombo.FocusedColor = Color.FromArgb(94, 148, 255);
+            waiterCombo.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            waiterCombo.Font = new Font("Segoe UI", 10F);
+            waiterCombo.ForeColor = Color.FromArgb(68, 88, 112);
+            waiterCombo.ItemHeight = 30;
+            waiterCombo.Location = new Point(21, 216);
+            waiterCombo.Margin = new Padding(3, 4, 3, 4);
+            waiterCombo.Name = "waiterCombo";
+            waiterCombo.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            waiterCombo.Size = new Size(252, 36);
+            waiterCombo.TabIndex = 3;
+            // 
+            // dateCheck
+            // 
+            dateCheck.AutoSize = true;
+            dateCheck.BackColor = Color.White;
+            dateCheck.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            dateCheck.CheckedState.BorderRadius = 0;
+            dateCheck.CheckedState.BorderThickness = 0;
+            dateCheck.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            dateCheck.Location = new Point(21, 276);
+            dateCheck.Margin = new Padding(3, 4, 3, 4);
+            dateCheck.Name = "dateCheck";
+            dateCheck.Size = new Size(79, 34);
+            dateCheck.TabIndex = 4;
+            dateCheck.Text = "Date";
+            dateCheck.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            dateCheck.UncheckedState.BorderRadius = 0;
+            dateCheck.UncheckedState.BorderThickness = 0;
+            dateCheck.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            dateCheck.UseVisualStyleBackColor = false;
+            // 
+            // outcommingGroup
+            // 
+            outcommingGroup.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            outcommingGroup.BorderColor = Color.FromArgb(64, 64, 64);
+            outcommingGroup.Controls.Add(guna2HtmlLabel4);
+            outcommingGroup.Controls.Add(guna2HtmlLabel3);
+            outcommingGroup.Controls.Add(guna2DateTimePicker2);
+            outcommingGroup.Controls.Add(guna2DateTimePicker1);
+            outcommingGroup.Controls.Add(dateCheck);
+            outcommingGroup.Controls.Add(waiterCombo);
+            outcommingGroup.Controls.Add(outcommingInvoiceBox);
+            outcommingGroup.Controls.Add(waiterCheck);
+            outcommingGroup.Controls.Add(guna2CheckBox2);
+            outcommingGroup.CustomBorderColor = Color.Goldenrod;
+            outcommingGroup.CustomizableEdges = customizableEdges29;
+            outcommingGroup.Font = new Font("Segoe UI", 14.2641506F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            outcommingGroup.ForeColor = Color.Navy;
+            outcommingGroup.Location = new Point(14, 288);
+            outcommingGroup.Margin = new Padding(3, 4, 3, 4);
+            outcommingGroup.Name = "outcommingGroup";
+            outcommingGroup.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            outcommingGroup.Size = new Size(303, 415);
+            outcommingGroup.TabIndex = 11;
+            outcommingGroup.Text = "Group by";
+            outcommingGroup.Visible = false;
+            outcommingGroup.Click += guna2GroupBox1_Click;
+            // 
+            // guna2HtmlLabel4
+            // 
+            guna2HtmlLabel4.BackColor = Color.Transparent;
+            guna2HtmlLabel4.Font = new Font("Segoe UI", 6.113208F, FontStyle.Bold | FontStyle.Italic);
+            guna2HtmlLabel4.ForeColor = Color.Black;
+            guna2HtmlLabel4.Location = new Point(157, 312);
+            guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            guna2HtmlLabel4.Size = new Size(13, 14);
+            guna2HtmlLabel4.TabIndex = 14;
+            guna2HtmlLabel4.Text = "to:";
+            // 
+            // guna2HtmlLabel3
+            // 
+            guna2HtmlLabel3.BackColor = Color.Transparent;
+            guna2HtmlLabel3.Font = new Font("Segoe UI", 6.113208F, FontStyle.Bold | FontStyle.Italic);
+            guna2HtmlLabel3.ForeColor = Color.Black;
+            guna2HtmlLabel3.Location = new Point(20, 312);
+            guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            guna2HtmlLabel3.Size = new Size(25, 14);
+            guna2HtmlLabel3.TabIndex = 13;
+            guna2HtmlLabel3.Text = "from:";
+            // 
+            // guna2DateTimePicker2
+            // 
+            guna2DateTimePicker2.Checked = true;
+            guna2DateTimePicker2.CustomizableEdges = customizableEdges25;
+            guna2DateTimePicker2.Enabled = false;
+            guna2DateTimePicker2.FillColor = Color.WhiteSmoke;
+            guna2DateTimePicker2.Font = new Font("Segoe UI", 6.792453F, FontStyle.Bold);
+            guna2DateTimePicker2.Format = DateTimePickerFormat.Custom;
+            guna2DateTimePicker2.Location = new Point(157, 328);
+            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
+            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            guna2DateTimePicker2.Size = new Size(116, 40);
+            guna2DateTimePicker2.TabIndex = 12;
+            guna2DateTimePicker2.Value = new DateTime(2024, 12, 9, 15, 16, 14, 867);
+            // 
+            // guna2DateTimePicker1
+            // 
+            guna2DateTimePicker1.Checked = true;
+            guna2DateTimePicker1.CustomizableEdges = customizableEdges27;
+            guna2DateTimePicker1.Enabled = false;
+            guna2DateTimePicker1.FillColor = Color.WhiteSmoke;
+            guna2DateTimePicker1.Font = new Font("Segoe UI", 6.792453F, FontStyle.Bold);
+            guna2DateTimePicker1.Format = DateTimePickerFormat.Custom;
+            guna2DateTimePicker1.Location = new Point(21, 328);
+            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
+            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2DateTimePicker1.Size = new Size(119, 40);
+            guna2DateTimePicker1.TabIndex = 6;
+            guna2DateTimePicker1.Value = new DateTime(2024, 12, 9, 15, 16, 46, 582);
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38.46154F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 61.53846F));
+            tableLayoutPanel1.Controls.Add(waiterLabel, 1, 0);
+            tableLayoutPanel1.Controls.Add(guna2HtmlLabel1, 0, 0);
+            tableLayoutPanel1.Location = new Point(415, 245);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new Size(300, 24);
+            tableLayoutPanel1.TabIndex = 12;
+            tableLayoutPanel1.Visible = false;
+            // 
+            // waiterLabel
+            // 
+            waiterLabel.BackColor = Color.Transparent;
+            waiterLabel.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            waiterLabel.ForeColor = Color.Black;
+            waiterLabel.Location = new Point(118, 3);
+            waiterLabel.Name = "waiterLabel";
+            waiterLabel.Size = new Size(54, 22);
+            waiterLabel.TabIndex = 1;
+            waiterLabel.Text = "Waiter:";
+            waiterLabel.TextAlignment = ContentAlignment.MiddleRight;
+            waiterLabel.Visible = false;
+            // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel1.ForeColor = Color.Black;
+            guna2HtmlLabel1.Location = new Point(3, 3);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(54, 22);
+            guna2HtmlLabel1.TabIndex = 0;
+            guna2HtmlLabel1.Text = "Waiter:";
+            guna2HtmlLabel1.TextAlignment = ContentAlignment.MiddleRight;
+            guna2HtmlLabel1.Visible = false;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38.46154F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 61.53846F));
+            tableLayoutPanel2.Controls.Add(dateLabel, 1, 0);
+            tableLayoutPanel2.Controls.Add(guna2HtmlLabel2, 0, 0);
+            tableLayoutPanel2.Location = new Point(809, 245);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(300, 24);
+            tableLayoutPanel2.TabIndex = 13;
+            tableLayoutPanel2.Visible = false;
+            // 
+            // dateLabel
+            // 
+            dateLabel.BackColor = Color.Transparent;
+            dateLabel.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dateLabel.ForeColor = Color.Black;
+            dateLabel.Location = new Point(118, 3);
+            dateLabel.Name = "dateLabel";
+            dateLabel.Size = new Size(54, 22);
+            dateLabel.TabIndex = 2;
+            dateLabel.Text = "Waiter:";
+            dateLabel.TextAlignment = ContentAlignment.MiddleRight;
+            dateLabel.Visible = false;
+            // 
+            // guna2HtmlLabel2
+            // 
+            guna2HtmlLabel2.BackColor = Color.Transparent;
+            guna2HtmlLabel2.Font = new Font("Segoe UI", 10.18868F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel2.ForeColor = Color.Black;
+            guna2HtmlLabel2.Location = new Point(3, 3);
+            guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            guna2HtmlLabel2.Size = new Size(40, 22);
+            guna2HtmlLabel2.TabIndex = 1;
+            guna2HtmlLabel2.Text = "Date:";
+            guna2HtmlLabel2.TextAlignment = ContentAlignment.MiddleRight;
+            guna2HtmlLabel2.Visible = false;
+            // 
             // itemGrid
             // 
             itemGrid.AllowUserToAddRows = false;
@@ -306,13 +678,13 @@
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 8.830189F);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlDarkDark;
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.Black;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             itemGrid.DefaultCellStyle = dataGridViewCellStyle3;
             itemGrid.GridColor = Color.FromArgb(231, 229, 255);
-            itemGrid.Location = new Point(335, 259);
+            itemGrid.Location = new Point(335, 286);
             itemGrid.Margin = new Padding(3, 4, 3, 4);
             itemGrid.Name = "itemGrid";
             itemGrid.RowHeadersVisible = false;
@@ -342,95 +714,27 @@
             itemGrid.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             itemGrid.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
-            // addInvoice
-            // 
-            addInvoice.Anchor = AnchorStyles.Top;
-            addInvoice.Checked = true;
-            addInvoice.CheckedState.BorderColor = Color.Black;
-            addInvoice.CheckedState.FillColor = Color.MidnightBlue;
-            addInvoice.CheckedState.ForeColor = Color.White;
-            addInvoice.CustomizableEdges = customizableEdges15;
-            addInvoice.DisabledState.BorderColor = Color.DarkGray;
-            addInvoice.DisabledState.CustomBorderColor = Color.DarkGray;
-            addInvoice.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            addInvoice.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            addInvoice.FillColor = Color.AliceBlue;
-            addInvoice.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
-            addInvoice.ForeColor = Color.Black;
-            addInvoice.Location = new Point(335, 810);
-            addInvoice.Margin = new Padding(3, 4, 3, 4);
-            addInvoice.Name = "addInvoice";
-            addInvoice.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            addInvoice.Size = new Size(210, 59);
-            addInvoice.TabIndex = 8;
-            addInvoice.Text = "Add";
-            addInvoice.Click += addInvoice_Click;
-            // 
-            // backButton
-            // 
-            backButton.Anchor = AnchorStyles.Top;
-            backButton.Checked = true;
-            backButton.CheckedState.BorderColor = Color.Black;
-            backButton.CheckedState.FillColor = Color.MidnightBlue;
-            backButton.CheckedState.ForeColor = Color.White;
-            backButton.CustomizableEdges = customizableEdges17;
-            backButton.DisabledState.BorderColor = Color.DarkGray;
-            backButton.DisabledState.CustomBorderColor = Color.DarkGray;
-            backButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            backButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            backButton.FillColor = Color.AliceBlue;
-            backButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
-            backButton.ForeColor = Color.Black;
-            backButton.Location = new Point(986, 810);
-            backButton.Margin = new Padding(3, 4, 3, 4);
-            backButton.Name = "backButton";
-            backButton.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            backButton.Size = new Size(210, 59);
-            backButton.TabIndex = 9;
-            backButton.Text = "Back";
-            backButton.Click += backButton_Click;
-            // 
-            // addUser
-            // 
-            addUser.Anchor = AnchorStyles.Top;
-            addUser.Checked = true;
-            addUser.CheckedState.BorderColor = Color.Black;
-            addUser.CheckedState.FillColor = Color.MidnightBlue;
-            addUser.CheckedState.ForeColor = Color.White;
-            addUser.CustomizableEdges = customizableEdges19;
-            addUser.DisabledState.BorderColor = Color.DarkGray;
-            addUser.DisabledState.CustomBorderColor = Color.DarkGray;
-            addUser.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            addUser.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            addUser.FillColor = Color.AliceBlue;
-            addUser.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
-            addUser.ForeColor = Color.Black;
-            addUser.Location = new Point(335, 810);
-            addUser.Margin = new Padding(3, 4, 3, 4);
-            addUser.Name = "addUser";
-            addUser.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            addUser.Size = new Size(210, 59);
-            addUser.TabIndex = 10;
-            addUser.Text = "Add";
-            addUser.Click += addUser_Click;
-            // 
             // ownerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
             ClientSize = new Size(1209, 882);
+            Controls.Add(tableLayoutPanel2);
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(outcommingGroup);
             Controls.Add(addUser);
             Controls.Add(backButton);
             Controls.Add(itemGrid);
-            Controls.Add(incommingGroup);
             Controls.Add(usersTab);
             Controls.Add(outcommingTab);
             Controls.Add(incommingTab);
             Controls.Add(guna2Panel1);
             Controls.Add(addInvoice);
+            Controls.Add(incommingGroup);
             ForeColor = SystemColors.ControlDarkDark;
             Margin = new Padding(3, 4, 3, 4);
+            MinimumSize = new Size(1225, 923);
             Name = "ownerForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Owner";
@@ -441,6 +745,12 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             incommingGroup.ResumeLayout(false);
             incommingGroup.PerformLayout();
+            outcommingGroup.ResumeLayout(false);
+            outcommingGroup.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)itemGrid).EndInit();
             ResumeLayout(false);
         }
@@ -458,9 +768,25 @@
         private Guna.UI2.WinForms.Guna2CheckBox inItemCheck;
         private Guna.UI2.WinForms.Guna2CheckBox inNumberCheck;
         private Guna.UI2.WinForms.Guna2ComboBox inItemCombo;
-        private Guna.UI2.WinForms.Guna2DataGridView itemGrid;
         private Guna.UI2.WinForms.Guna2Button addInvoice;
         private Guna.UI2.WinForms.Guna2Button backButton;
         private Guna.UI2.WinForms.Guna2Button addUser;
+        private Guna.UI2.WinForms.Guna2CheckBox guna2CheckBox2;
+        private Guna.UI2.WinForms.Guna2CheckBox waiterCheck;
+        private Guna.UI2.WinForms.Guna2TextBox outcommingInvoiceBox;
+        private Guna.UI2.WinForms.Guna2ComboBox waiterCombo;
+        private Guna.UI2.WinForms.Guna2CheckBox dateCheck;
+        private Guna.UI2.WinForms.Guna2GroupBox outcommingGroup;
+        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker2;
+        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2DataGridView itemGrid;
+        private Guna.UI2.WinForms.Guna2HtmlLabel waiterLabel;
+        private Guna.UI2.WinForms.Guna2HtmlLabel dateLabel;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
     }
 }
