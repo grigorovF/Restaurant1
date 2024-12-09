@@ -390,47 +390,47 @@ namespace Restaurant
                 MessageBox.Show("No orders to save for this table.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            DataTable orderTable = orderDictionary[selectedTable];
-            try
+            else
             {
-                conn.Open();
-                foreach (DataRow row in orderTable.Rows)
+                try
                 {
-                    string product = row["Product"].ToString();
-                    int quantity = Convert.ToInt32(row["Quantity"]);
-                    double price = Convert.ToDouble(row["Price"]);
-                    double total = Convert.ToDouble(row["Total"]);
-
-
-                    string s1 = @"INSERT INTO Orders (OrderID, TableName, Product, Quantity, UserID)
-                                  VALUES (@OrderID, @TableName, @Product, @Quantity, @UserID)";
-
-                    using (SqlCommand insert1 = new SqlCommand(s1, conn))
-                    {
-                        Random random = new Random();
-                        string s = random.Next(0, 100).ToString();
-                        insert1.Parameters.AddWithValue("@OrderID", s);
-                        insert1.Parameters.AddWithValue("@TableName", selectedTable);
-                        insert1.Parameters.AddWithValue("@Product", product);
-                        insert1.Parameters.AddWithValue("@Quantity", quantity);
-                        insert1.Parameters.AddWithValue("@UserID", currentUser);
-                        insert1.ExecuteNonQuery();
+                    Random random = new Random();
+                    HashSet<int> ids = new HashSet<int>();
+                    int id;
+                    do {
+                        id = random.Next(0, 100);
                     }
+                    while (ids.Contains(id));
+                    conn.Open();
+                    string s1 = @"INSERT INTO Orders(OrderID, TableName, Product, Quantity, UserID)
+                                VALUES(@OrderID, @TableName, @Product, @Quantity, @UserID)";
+                    foreach (DataGridViewRow row in orderGrid.Rows) {
+                        string OrderID = id.ToString();
+                        string TableName = listBox1.SelectedItem.ToString();
+                        string product = row.Cells["Product"].Value?.ToString();
+                        int quantity = int.Parse(row.Cells["Quantity"].Value?.ToString());
+                        string UserID = currentUser;
 
+                        
+                        using (SqlCommand addOrder = new SqlCommand(s1, conn)) {
+                            addOrder.Parameters.AddWithValue("@OrderID", OrderID);
+                            addOrder.Parameters.AddWithValue("@TableName", TableName);
+                            addOrder.Parameters.AddWithValue("@Product", product);
+                            addOrder.Parameters.AddWithValue("@Quantity", quantity);
+                            addOrder.Parameters.AddWithValue("@UserID", UserID);
+                            addOrder.ExecuteNonQuery();
+                        }
+                    }
                 }
-
+                catch (Exception ex)
+                {
+                   // MessageBox.Show("Order can't be sent. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error Saving Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conn.Close();
-            }
-
             orderTable.Clear();
             orderGrid.DataSource = null;
 

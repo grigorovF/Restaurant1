@@ -27,24 +27,19 @@ namespace Restaurant
             try
             {
                 conn.Open();
-                string s1 = "SELECT * FROM Orders";
-                using (SqlCommand loadTables = new SqlCommand(s1, conn))
+                HashSet<string> ID = new HashSet<string>();
+                string s1 = "SELECT OrderID FROM Orders";
+                using (SqlCommand load = new SqlCommand(s1, conn))
                 {
-                    using (SqlDataReader reader = loadTables.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            tableListBox.Items.Add(reader.GetString(1));
+                    using (SqlDataReader reader = load.ExecuteReader()) {
+                        while (reader.Read()) {
+                            string items = reader.GetString(0);
+                            if (ID.Add(items))
+                                tableListBox.Items.Add(items);
                         }
-                    }
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(loadTables))
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        orderGridView.DataSource = dt;
-                    }
+                    } 
                 }
+               
                 using (SqlCommand loadName = new SqlCommand("SELECT * FROM userTable WHERE password = @password", conn)) {
                     loadName.Parameters.AddWithValue("@password", password);
                     using (SqlDataReader reader = loadName.ExecuteReader()) {
@@ -89,10 +84,10 @@ namespace Restaurant
                 try
                 {
                     conn.Open();
-                    string s1 = "SELECT * FROM Orders WHERE TableName = @TableName";
+                    string s1 = "SELECT * FROM Orders WHERE OrderID = @OrderID";
                     using (SqlCommand loadItems = new SqlCommand(s1, conn))
                     {
-                        loadItems.Parameters.AddWithValue("@TableName", tableListBox.SelectedItem.ToString());
+                        loadItems.Parameters.AddWithValue("@OrderID", tableListBox.SelectedItem.ToString());
                         using (SqlDataAdapter adapter = new SqlDataAdapter(loadItems))
                         {
                             DataTable dt = new DataTable();
@@ -130,39 +125,33 @@ namespace Restaurant
                     if (input == DialogResult.Yes)
                     {
                         foreach (DataGridViewRow row in orderGridView.SelectedRows)
-                        {
-                            if (row.IsNewRow) continue;
-
-                                                       
-                            int index = row.Index;
-                            string productName = row.Cells[2].Value.ToString(); 
+                        {                                                       
                             try
                             {
                                 conn.Open();
-                                string delete = "DELETE FROM Orders WHERE Product = @Product";
+                                string delete = "DELETE FROM Orders WHERE OrderID = @OrderID";
                                 using (SqlCommand del = new SqlCommand(delete, conn)) {
-                                    del.Parameters.AddWithValue("@Product", productName);
+                                    del.Parameters.AddWithValue("@OrderID", tableListBox.SelectedItem.ToString());
                                     del.ExecuteNonQuery();
 
                                 }
 
 
-                               /* string select = "SELECT * FROM Orders";
-                                using (SqlCommand sel = new SqlCommand(select, conn)) {
-                                    using (SqlDataAdapter adapter = new SqlDataAdapter(sel)) { 
-                                        DataTable dataTable = new DataTable();
-                                        adapter.Fill(dataTable);
-                                        orderGridView.DataSource = null;
-                                        orderGridView.DataSource = dataTable;
-                                    }
-                                }
-                               */
-       
-                                orderGridView.Rows.RemoveAt(index);
+                                /* string select = "SELECT * FROM Orders";
+                                 using (SqlCommand sel = new SqlCommand(select, conn)) {
+                                     using (SqlDataAdapter adapter = new SqlDataAdapter(sel)) { 
+                                         DataTable dataTable = new DataTable();
+                                         adapter.Fill(dataTable);
+                                         orderGridView.DataSource = null;
+                                         orderGridView.DataSource = dataTable;
+                                     }
+                                 }
+                                */
+
+                                tableListBox.Items.Remove(tableListBox.SelectedItem);
                                 tableListBox.Refresh();
+                                orderGridView.DataSource = null;
 
-
-                                //HERE
                             }
                             catch (Exception ex)
                             {

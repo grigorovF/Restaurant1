@@ -258,10 +258,11 @@ namespace Restaurant
                         }
                     }
                     string deleteString = "DELETE FROM Tables WHERE TableName = @TableName";
-                    using (SqlCommand delete = new SqlCommand(deleteString, conn)) {
+                    using (SqlCommand delete = new SqlCommand(deleteString, conn))
+                    {
                         delete.Parameters.AddWithValue("@TableName", selectedTable);
                         delete.ExecuteNonQuery();
-                        
+
                     }
                 }
                 catch (Exception ex)
@@ -270,9 +271,13 @@ namespace Restaurant
                 }
                 finally
                 {
-                    
+
                     conn.Close();
                 }
+            }
+            else { 
+                e.Cancel = true;
+                this.Hide();
             }
         }
     }
