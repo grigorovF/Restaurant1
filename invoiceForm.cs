@@ -14,6 +14,7 @@ namespace Restaurant
 {
     public partial class invoiceForm : Form
     {
+
         SqlConnection conn = new SqlConnection("Data Source=Grigorov\\SQLEXPRESS;Initial Catalog=restaurantManagment;Integrated Security=True;Encrypt=False; MultipleActiveResultSets=True");
         DataTable invoiceTable = new DataTable();
         string waiter;
@@ -21,6 +22,7 @@ namespace Restaurant
         double totalSum = 0;
         public string inNumber;
         public string selectedTable;
+        public event Action InvoiceFormHidden;
         public invoiceForm(DataTable invoiceTable, string waiter, string inNumber, string selectedTable)
         {
             this.inNumber = inNumber;
@@ -264,21 +266,25 @@ namespace Restaurant
                         delete.ExecuteNonQuery();
 
                     }
-                }
-                catch (Exception ex)
-                {
+                    }
+                     catch (Exception ex)
+                     {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                }
+                     }
                 finally
                 {
 
                     conn.Close();
                 }
             }
-            else { 
+
+            else
+            {
                 e.Cancel = true;
                 this.Hide();
+
             }
         }
+         
     }
 }

@@ -397,22 +397,25 @@ namespace Restaurant
                     Random random = new Random();
                     HashSet<int> ids = new HashSet<int>();
                     int id;
-                    do {
+                    do
+                    {
                         id = random.Next(0, 100);
                     }
                     while (ids.Contains(id));
                     conn.Open();
                     string s1 = @"INSERT INTO Orders(OrderID, TableName, Product, Quantity, UserID)
                                 VALUES(@OrderID, @TableName, @Product, @Quantity, @UserID)";
-                    foreach (DataGridViewRow row in orderGrid.Rows) {
+                    foreach (DataGridViewRow row in orderGrid.Rows)
+                    {
                         string OrderID = id.ToString();
                         string TableName = listBox1.SelectedItem.ToString();
                         string product = row.Cells["Product"].Value?.ToString();
                         int quantity = int.Parse(row.Cells["Quantity"].Value?.ToString());
                         string UserID = currentUser;
 
-                        
-                        using (SqlCommand addOrder = new SqlCommand(s1, conn)) {
+
+                        using (SqlCommand addOrder = new SqlCommand(s1, conn))
+                        {
                             addOrder.Parameters.AddWithValue("@OrderID", OrderID);
                             addOrder.Parameters.AddWithValue("@TableName", TableName);
                             addOrder.Parameters.AddWithValue("@Product", product);
@@ -424,7 +427,7 @@ namespace Restaurant
                 }
                 catch (Exception ex)
                 {
-                   // MessageBox.Show("Order can't be sent. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // MessageBox.Show("Order can't be sent. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -457,9 +460,7 @@ namespace Restaurant
             DataTable table = invoiceDictionatry[selectedTable];
             invoiceForm invoiceForm = new invoiceForm(table, userNameLabel.Text.ToString(), getNummber(), selectedTable);
             invoiceForm.ShowDialog();
-            invoiceGrid.DataSource = null;
-            listBox1.Items.Remove(selectedTable);
-
+            
         }
 
 
@@ -594,7 +595,14 @@ namespace Restaurant
             }
         }
 
-        
+        private void separatelyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string selectedTable = listBox1.SelectedItem.ToString();
+            DataTable table = invoiceDictionatry[selectedTable];
+
+            ceparateForm ceparateForm = new ceparateForm(password, selectedTable, table);
+            ceparateForm.ShowDialog();
+        }
     }
 }
 

@@ -118,12 +118,12 @@
             contextMenuStrip1.ImageScalingSize = new Size(18, 18);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { makeOrderToolStripMenuItem, makeInvoiceToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(166, 52);
+            contextMenuStrip1.Size = new Size(193, 76);
             // 
             // makeOrderToolStripMenuItem
             // 
             makeOrderToolStripMenuItem.Name = "makeOrderToolStripMenuItem";
-            makeOrderToolStripMenuItem.Size = new Size(165, 24);
+            makeOrderToolStripMenuItem.Size = new Size(192, 24);
             makeOrderToolStripMenuItem.Text = "Make Order";
             makeOrderToolStripMenuItem.Click += makeOrderToolStripMenuItem_Click;
             // 
@@ -131,19 +131,20 @@
             // 
             makeInvoiceToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { separatelyToolStripMenuItem, totalToolStripMenuItem });
             makeInvoiceToolStripMenuItem.Name = "makeInvoiceToolStripMenuItem";
-            makeInvoiceToolStripMenuItem.Size = new Size(165, 24);
+            makeInvoiceToolStripMenuItem.Size = new Size(192, 24);
             makeInvoiceToolStripMenuItem.Text = "Make Invoice";
             // 
             // separatelyToolStripMenuItem
             // 
             separatelyToolStripMenuItem.Name = "separatelyToolStripMenuItem";
-            separatelyToolStripMenuItem.Size = new Size(154, 24);
+            separatelyToolStripMenuItem.Size = new Size(198, 24);
             separatelyToolStripMenuItem.Text = "Separately";
+            separatelyToolStripMenuItem.Click += separatelyToolStripMenuItem_Click;
             // 
             // totalToolStripMenuItem
             // 
             totalToolStripMenuItem.Name = "totalToolStripMenuItem";
-            totalToolStripMenuItem.Size = new Size(154, 24);
+            totalToolStripMenuItem.Size = new Size(198, 24);
             totalToolStripMenuItem.Text = "Total";
             totalToolStripMenuItem.Click += totalToolStripMenuItem_Click;
             // 
