@@ -459,8 +459,41 @@ namespace Restaurant
 
             DataTable table = invoiceDictionatry[selectedTable];
             invoiceForm invoiceForm = new invoiceForm(table, userNameLabel.Text.ToString(), getNummber(), selectedTable);
+            invoiceForm.TableDeleted += RefreshTables;
             invoiceForm.ShowDialog();
             
+        }
+        private void RefreshTables()
+        {
+           
+            listBox1.Items.Clear();
+            invoiceDictionatry.Clear();
+            invoiceGrid.DataSource = null;
+            try
+            {
+                conn.Open();
+                string query = "SELECT TableName FROM Tables WHERE UserID = @UserID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", currentUser);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string tableName = reader["TableName"].ToString();
+                            listBox1.Items.Add(tableName);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing tables: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
 

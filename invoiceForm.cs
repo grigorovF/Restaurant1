@@ -22,7 +22,7 @@ namespace Restaurant
         double totalSum = 0;
         public string inNumber;
         public string selectedTable;
-        public event Action InvoiceFormHidden;
+        public event Action TableDeleted;
         public invoiceForm(DataTable invoiceTable, string waiter, string inNumber, string selectedTable)
         {
             this.inNumber = inNumber;
@@ -266,11 +266,12 @@ namespace Restaurant
                         delete.ExecuteNonQuery();
 
                     }
-                    }
-                     catch (Exception ex)
-                     {
+                    TableDeleted?.Invoke();
+                }
+                catch (Exception ex)
+                   {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                     }
+                }
                 finally
                 {
 
