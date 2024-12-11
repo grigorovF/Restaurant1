@@ -637,6 +637,9 @@ namespace Restaurant
 
             ceparateForm ceparateForm = new ceparateForm(password, selectedTable, table, getNummber());
             ceparateForm.ShowDialog();
+
+            listBox1.SelectedItem = null;
+            invoiceGrid.DataSource = null;
         }
     }
 }

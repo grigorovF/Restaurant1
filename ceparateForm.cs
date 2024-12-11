@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.Data.SqlClient;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Restaurant
@@ -123,11 +124,56 @@ namespace Restaurant
                 int quantity = Convert.ToInt32(array[1].Replace("Quantity: ", "").Trim());
                 double price = Convert.ToDouble(array[2].Replace("Price: ", "").Trim());
 
-                dt.Rows.Add(product, quantity, price, quantity * price); 
+                dt.Rows.Add(product, quantity, price, quantity * price);
+                
+                try
+                {
+                    conn.Open();
+                    string selectQuery = @"SELECT Quantity FROM Tables WHERE TableName = @TableName AND Product = @Product AND UserID = @UserID";
+                    int currentQuantity = 0;
+
+                    using (SqlCommand selectCommand = new SqlCommand(selectQuery, conn))
+                    {
+                        selectCommand.Parameters.AddWithValue("@TableName", selectedTable);
+                        selectCommand.Parameters.AddWithValue("@Product", product);
+                        selectCommand.Parameters.AddWithValue("@UserID", userNameLabel.Text);
+
+                        var result = selectCommand.ExecuteScalar();
+                        if (result != DBNull.Value)
+                        {
+                            currentQuantity = Convert.ToInt32(result);
+                        }
+                    }
+                    double Total = (currentQuantity - quantity) * price; 
+                    string s1 = @"UPDATE Tables 
+                  SET Quantity = Quantity - @quantity, 
+                      Total = @Total 
+                  WHERE TableName = @TableName 
+                  AND Product = @Product 
+                  AND UserID = @UserID";
+
+                    using (SqlCommand update = new SqlCommand(s1, conn))
+                    {
+                        update.Parameters.AddWithValue("@quantity", quantity);
+                        update.Parameters.AddWithValue("@Total", Total);
+                        update.Parameters.AddWithValue("@TableName", selectedTable);
+                        update.Parameters.AddWithValue("@Product", product);
+                        update.Parameters.AddWithValue("@UserID", userNameLabel.Text);
+                        update.ExecuteNonQuery();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error adding rest of products", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
-            paytry paytry = new paytry(dt);
-            paytry.ShowDialog();
-           
+           // push in invoice with all parameters
+            
         }
     }
 }
