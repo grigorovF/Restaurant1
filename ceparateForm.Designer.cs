@@ -36,6 +36,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            userNameLabel = new Label();
             pictureBox1 = new PictureBox();
             listBox1 = new ListBox();
             listBox2 = new ListBox();
@@ -50,14 +51,27 @@
             // 
             guna2Panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             guna2Panel1.BackColor = Color.Goldenrod;
+            guna2Panel1.Controls.Add(userNameLabel);
             guna2Panel1.Controls.Add(pictureBox1);
             guna2Panel1.CustomizableEdges = customizableEdges1;
             guna2Panel1.Location = new Point(-1, -4);
             guna2Panel1.Margin = new Padding(3, 4, 3, 4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel1.Size = new Size(813, 138);
+            guna2Panel1.Size = new Size(960, 138);
             guna2Panel1.TabIndex = 3;
+            // 
+            // userNameLabel
+            // 
+            userNameLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            userNameLabel.AutoSize = true;
+            userNameLabel.Font = new Font("Segoe UI", 21.73585F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            userNameLabel.ForeColor = Color.Black;
+            userNameLabel.Location = new Point(162, 50);
+            userNameLabel.Name = "userNameLabel";
+            userNameLabel.Size = new Size(112, 45);
+            userNameLabel.TabIndex = 2;
+            userNameLabel.Text = "owner";
             // 
             // pictureBox1
             // 
@@ -71,18 +85,20 @@
             // 
             // listBox1
             // 
+            listBox1.Font = new Font("Segoe UI Black", 10.18868F, FontStyle.Bold);
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(12, 144);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(326, 364);
+            listBox1.Size = new Size(384, 364);
             listBox1.TabIndex = 4;
             // 
             // listBox2
             // 
+            listBox2.Font = new Font("Segoe UI Black", 10.18868F, FontStyle.Bold);
             listBox2.FormattingEnabled = true;
-            listBox2.Location = new Point(464, 144);
+            listBox2.Location = new Point(562, 141);
             listBox2.Name = "listBox2";
-            listBox2.Size = new Size(326, 364);
+            listBox2.Size = new Size(384, 364);
             listBox2.TabIndex = 5;
             // 
             // guna2CircleButton1
@@ -94,7 +110,7 @@
             guna2CircleButton1.FillColor = Color.Navy;
             guna2CircleButton1.Font = new Font("Arial Black", 10.2641506F, FontStyle.Bold);
             guna2CircleButton1.ForeColor = Color.White;
-            guna2CircleButton1.Location = new Point(371, 322);
+            guna2CircleButton1.Location = new Point(449, 315);
             guna2CircleButton1.Name = "guna2CircleButton1";
             guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges3;
             guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -118,7 +134,7 @@
             backButton.FillColor = Color.AliceBlue;
             backButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             backButton.ForeColor = Color.Black;
-            backButton.Location = new Point(12, 565);
+            backButton.Location = new Point(159, 565);
             backButton.Margin = new Padding(3, 4, 3, 4);
             backButton.Name = "backButton";
             backButton.ShadowDecoration.CustomizableEdges = customizableEdges5;
@@ -141,20 +157,21 @@
             payButton.FillColor = Color.AliceBlue;
             payButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             payButton.ForeColor = Color.Black;
-            payButton.Location = new Point(684, 565);
+            payButton.Location = new Point(831, 565);
             payButton.Margin = new Padding(3, 4, 3, 4);
             payButton.Name = "payButton";
             payButton.ShadowDecoration.CustomizableEdges = customizableEdges7;
             payButton.Size = new Size(106, 59);
             payButton.TabIndex = 12;
             payButton.Text = "Pay";
+            payButton.Click += payButton_Click;
             // 
             // ceparateForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
-            ClientSize = new Size(814, 637);
+            ClientSize = new Size(961, 637);
             Controls.Add(payButton);
             Controls.Add(backButton);
             Controls.Add(guna2CircleButton1);
@@ -168,6 +185,7 @@
             FormClosing += ceparateForm_FormClosing;
             Load += ceparateForm_Load;
             guna2Panel1.ResumeLayout(false);
+            guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -180,5 +198,6 @@
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private Guna.UI2.WinForms.Guna2Button backButton;
         private Guna.UI2.WinForms.Guna2Button payButton;
+        private Label userNameLabel;
     }
 }

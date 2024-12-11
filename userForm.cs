@@ -630,10 +630,12 @@ namespace Restaurant
 
         private void separatelyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+          
             string selectedTable = listBox1.SelectedItem.ToString();
             DataTable table = invoiceDictionatry[selectedTable];
 
-            ceparateForm ceparateForm = new ceparateForm(password, selectedTable, table);
+
+            ceparateForm ceparateForm = new ceparateForm(password, selectedTable, table, getNummber());
             ceparateForm.ShowDialog();
         }
     }
