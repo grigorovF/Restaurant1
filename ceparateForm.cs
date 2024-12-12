@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.Data.SqlClient;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Management;
 
 
 namespace Restaurant
@@ -21,14 +22,24 @@ namespace Restaurant
         string password;
         string selectedTable;
         DataTable table;
-        string number;
-        
-        public ceparateForm(string password,  string selectedTable, DataTable table, string number)
+
+        private string number() {
+            Random random = new Random();
+            int number;
+
+            HashSet<int> numbers = new HashSet<int>();
+            do { 
+                number = random.Next(0, 99999);
+            }
+            while (numbers.Contains(number));
+
+            return number.ToString();
+        }
+        public ceparateForm(string password,  string selectedTable, DataTable table)
         {
             this.table = table;
             this.selectedTable = selectedTable;
             this.password = password;
-            this.number = number;
             InitializeComponent();
         }
 
@@ -171,6 +182,9 @@ namespace Restaurant
                 }
             }
             RefreshListBox1();
+
+            invoiceForm invoiceForm = new invoiceForm(dt, userNameLabel.Text, number(), selectedTable);
+            invoiceForm.ShowDialog();
             
         }
         private void RefreshListBox1()
@@ -190,7 +204,19 @@ namespace Restaurant
                             string product = reader["Product"].ToString();
                             int quantity = Convert.ToInt32(reader["Quantity"]);
                             double price = Convert.ToDouble(reader["Price"]);
-                            listBox1.Items.Add("Product: " + product + " - Quantity: " + quantity + " - Price: " + price+ " - Total: " + price*quantity );
+                            if (quantity > 0)
+                            {
+                                listBox1.Items.Add("Product: " + product + " - Quantity: " + quantity + " - Price: " + price + " - Total: " + price * quantity);
+                            }
+                            else
+                            {
+                                string s = "DELETE FROM TABLES WHERE Quantity = '0'";
+                                using (SqlCommand del = new SqlCommand(s, conn)) {
+                                    del.ExecuteNonQuery();
+                                }
+                                    listBox1.Items.Remove(listBox1.SelectedItem);
+                                
+                            }
                         }
                     }
                 }

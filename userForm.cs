@@ -38,7 +38,7 @@ namespace Restaurant
             int num;
             do
             {
-                num = random.Next(0, 100000000);
+                num = random.Next(100000, 1000000000);
             }
             while (list.Contains(num));
 
@@ -635,11 +635,12 @@ namespace Restaurant
             DataTable table = invoiceDictionatry[selectedTable];
 
 
-            ceparateForm ceparateForm = new ceparateForm(password, selectedTable, table, getNummber());
+            ceparateForm ceparateForm = new ceparateForm(password, selectedTable, table);
             ceparateForm.ShowDialog();
 
             listBox1.SelectedItem = null;
             invoiceGrid.DataSource = null;
+            
         }
     }
 }

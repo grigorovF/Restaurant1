@@ -134,7 +134,7 @@
             backButton.FillColor = Color.AliceBlue;
             backButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             backButton.ForeColor = Color.Black;
-            backButton.Location = new Point(159, 565);
+            backButton.Location = new Point(12, 565);
             backButton.Margin = new Padding(3, 4, 3, 4);
             backButton.Name = "backButton";
             backButton.ShadowDecoration.CustomizableEdges = customizableEdges5;
