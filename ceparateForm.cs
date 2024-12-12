@@ -139,10 +139,8 @@ namespace Restaurant
                         selectCommand.Parameters.AddWithValue("@UserID", userNameLabel.Text);
 
                         var result = selectCommand.ExecuteScalar();
-                        if (result != DBNull.Value)
-                        {
-                            currentQuantity = Convert.ToInt32(result);
-                        }
+                        currentQuantity = Convert.ToInt32(result);
+                        
                     }
                     double Total = (currentQuantity - quantity) * price; 
                     string s1 = @"UPDATE Tables 
@@ -172,8 +170,39 @@ namespace Restaurant
                     conn.Close();
                 }
             }
-           // push in invoice with all parameters
+            RefreshListBox1();
             
+        }
+        private void RefreshListBox1()
+        {
+            listBox1.Items.Clear();
+            try
+            {
+                conn.Open();
+                string query = "SELECT Product, Quantity, Price FROM Tables WHERE TableName = @TableName";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TableName", selectedTable);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string product = reader["Product"].ToString();
+                            int quantity = Convert.ToInt32(reader["Quantity"]);
+                            double price = Convert.ToDouble(reader["Price"]);
+                            listBox1.Items.Add("Product: " + product + " - Quantity: " + quantity + " - Price: " + price+ " - Total: " + price*quantity );
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

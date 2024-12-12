@@ -63,6 +63,16 @@ namespace Restaurant.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _31888db2a561c4b270f46ca550a4fbd4 {
+            get {
+                object obj = ResourceManager.GetObject("31888db2a561c4b270f46ca550a4fbd4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap black_and_white_businessperson_communication_man_logo {
             get {
                 object obj = ResourceManager.GetObject("black-and-white-businessperson-communication-man-logo", resourceCulture);
@@ -96,6 +106,16 @@ namespace Restaurant.Properties {
         internal static System.Drawing.Bitmap pngtree_d_image_of_a_man_with_hat_in_black_and_white_png_image_15764275 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-d-image-of-a-man-with-hat-in-black-and-white-png-image_15764275", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_vector_printer_icon_png_image_318079 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-vector-printer-icon-png-image_318079", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

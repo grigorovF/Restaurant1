@@ -454,11 +454,11 @@ namespace Restaurant
                 }
                 else
                 {
-                    dateLabel.Visible = true;
-                    waiterLabel.Visible = true;
-                    tableLayoutPanel1.Visible = true;
-                    tableLayoutPanel2.Visible = true;
-                    guna2HtmlLabel2.Visible = true;
+                    dateLabel.Visible = false;
+                    waiterLabel.Visible = false;
+                    tableLayoutPanel1.Visible = false;
+                    tableLayoutPanel2.Visible = false;
+                    guna2HtmlLabel2.Visible = false;
                     outcommingInvoiceBox.Enabled = false;
                     outcommingInvoiceBox.Text = null;
                     string s1 = "SELECT * FROM outcommingInvoices";
@@ -537,7 +537,8 @@ namespace Restaurant
                     conn.Close();
                 }
             }
-            else {
+            else
+            {
                 dateLabel.Visible = false;
                 waiterLabel.Visible = false;
                 tableLayoutPanel1.Visible = false;
@@ -558,13 +559,17 @@ namespace Restaurant
                 guna2CheckBox2.Checked = false;
                 dateCheck.Checked = false;
                 waiterCombo.Enabled = true;
-                try {
+                try
+                {
                     conn.Open();
                     string s = "SELECT * FROM userTable WHERE NOT password = '0000' AND NOT password = '1234' AND NOT password = '12345'";
-                    using (SqlCommand cmd = new SqlCommand(s, conn)) {
-                        using (SqlDataReader r = cmd.ExecuteReader()) {
-                            while (r.Read()) { 
-                                string item = r[3].ToString();
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        using (SqlDataReader r = cmd.ExecuteReader())
+                        {
+                            while (r.Read())
+                            {
+                                string item = r[0].ToString() + " " + r[1].ToString();
                                 waiterCombo.Items.Add(item);
                             }
                         }
@@ -580,11 +585,14 @@ namespace Restaurant
                     conn.Close();
                 }
             }
-            else { 
+            else
+            {
                 waiterCombo.Items.Clear();
                 waiterCombo.Text = null;
-                try{
-                string s1 = "SELECT * FROM outcommingInvoices";
+                try
+                {
+                    conn.Open();
+                    string s1 = "SELECT * FROM outcommingInvoices";
                     using (SqlCommand cmd1 = new SqlCommand(s1, conn))
                     {
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd1))
@@ -593,7 +601,64 @@ namespace Restaurant
                             adapter.Fill(dt);
                             itemGrid.DataSource = dt;
                         }
-                    } 
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void waiterCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (waiterCombo.SelectedIndex >= 0) {
+                try {
+                    conn.Open();
+                    string s = @"SELECT op.Product, op.Quantity, op.Price, op.Total FROM outcommingProducts op
+                                INNER JOIN outcommingInvoices oi ON op.invoiceNumber = oi.invoiceNumber 
+                                WHERE oi.Waiter = @waiter";
+                    using (SqlCommand cmd = new SqlCommand(s, conn)) {
+                        cmd.Parameters.AddWithValue("@waiter", waiterCombo.SelectedItem.ToString());
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd)) { 
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
+
+                   // foreach(DataGridView row)
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally { 
+                    conn.Close();
+                }
+            
+            }
+            else {
+                try
+                {
+                    conn.Open ();
+                    string s1 = "SELECT * FROM outcommingInvoices";
+                    using (SqlCommand cmd1 = new SqlCommand(s1, conn))
+                    {
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd1))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
