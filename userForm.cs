@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Services;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
@@ -20,12 +21,11 @@ namespace Restaurant
         private Dictionary<string, DataTable> orderDictionary = new Dictionary<string, DataTable>();
         private Dictionary<string, DataTable> invoiceDictionatry = new Dictionary<string, DataTable>();
         DataTable orderTable = new DataTable();
-
         string password;
         string iNummber;
         private string currentUser;
         private Dictionary<string, List<string>> userTables = new Dictionary<string, List<string>>();
-
+        private DataServise dataServise = new DataServise();
         public userForm(string password)
         {
             this.password = password;
@@ -60,9 +60,45 @@ namespace Restaurant
                 e.Cancel = true;
             }
         }
-
+        private void RefreshTables()
+        {
+            listBox1.Items.Clear();
+            foreach (var tableName in dataServise.GetUserTables(currentUser))
+            {
+                listBox1.Items.Add(tableName);
+            }
+        }
+        private async Task LoadUserDataAsync()
+        {
+            try
+            {
+                await conn.OpenAsync();
+                string query = "SELECT * FROM userTable WHERE password = @password";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@password", password);
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            currentUser = $"{reader.GetString(0)} {reader.GetString(1)}";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading user data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         private void userForm_Load(object sender, EventArgs e)
         {
+            dataServise.DataUpdated += RefreshTables;
+            dataServise.RefreshData(currentUser);
             try
             {
                 conn.Open();
@@ -183,16 +219,17 @@ namespace Restaurant
 
             if (listBox1.SelectedIndex >= 0)
             {
-                if (listBox1.SelectedIndex >= 0)
-                {
-                    string selectedTable = listBox1.SelectedItem.ToString();
-                    productNameBox.Enabled = true;
-                    productQuantityBox.Enabled = true;
+                string selectedTable = listBox1.SelectedItem.ToString();
+                BindingSource bindingSource = new BindingSource();
+                bindingSource.DataSource = invoiceDictionatry[selectedTable];
+                invoiceGrid.DataSource = bindingSource;
 
-                    if (invoiceDictionatry.ContainsKey(selectedTable))
-                    {
-                        invoiceGrid.DataSource = invoiceDictionatry[selectedTable];
-                    }
+                productNameBox.Enabled = true;
+                productQuantityBox.Enabled = true;
+
+                if (invoiceDictionatry.ContainsKey(selectedTable))
+                {
+                    invoiceGrid.DataSource = invoiceDictionatry[selectedTable];
                 }
             }
         }
@@ -463,39 +500,7 @@ namespace Restaurant
             invoiceForm.ShowDialog();
             
         }
-        private void RefreshTables()
-        {
-           
-            listBox1.Items.Clear();
-            invoiceDictionatry.Clear();
-            invoiceGrid.DataSource = null;
-            try
-            {
-                conn.Open();
-                string query = "SELECT TableName FROM Tables WHERE UserID = @UserID";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@UserID", currentUser);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string tableName = reader["TableName"].ToString();
-                            listBox1.Items.Add(tableName);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error refreshing tables: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-
+       
 
 
         private void invoiceGrid_KeyDown(object sender, KeyEventArgs e)

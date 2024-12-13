@@ -617,22 +617,26 @@ namespace Restaurant
 
         private void waiterCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (waiterCombo.SelectedIndex >= 0) {
-                try {
+            if (waiterCombo.SelectedIndex >= 0)
+            {
+                try
+                {
                     conn.Open();
                     string s = @"SELECT op.Product, op.Quantity, op.Price, op.Total FROM outcommingProducts op
                                 INNER JOIN outcommingInvoices oi ON op.invoiceNumber = oi.invoiceNumber 
                                 WHERE oi.Waiter = @waiter";
-                    using (SqlCommand cmd = new SqlCommand(s, conn)) {
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
                         cmd.Parameters.AddWithValue("@waiter", waiterCombo.SelectedItem.ToString());
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd)) { 
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
                             DataTable dt = new DataTable();
                             adapter.Fill(dt);
                             itemGrid.DataSource = dt;
                         }
                     }
 
-                   // foreach(DataGridView row)
+                    // foreach(DataGridView row)
 
                 }
                 catch (Exception ex)
@@ -640,15 +644,17 @@ namespace Restaurant
 
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 }
-                finally { 
+                finally
+                {
                     conn.Close();
                 }
-            
+
             }
-            else {
+            else
+            {
                 try
                 {
-                    conn.Open ();
+                    conn.Open();
                     string s1 = "SELECT * FROM outcommingInvoices";
                     using (SqlCommand cmd1 = new SqlCommand(s1, conn))
                     {
@@ -670,6 +676,114 @@ namespace Restaurant
                     conn.Close();
                 }
             }
+        }
+
+        private void dateCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dateCheck.Checked)
+            {
+                guna2CheckBox2.Checked = false;
+                fromDatePicker.Enabled = true;
+                toDateTimePicker.Enabled = true;
+            }
+            else
+            {
+                fromDatePicker.Enabled = false;
+                toDateTimePicker.Enabled = false;
+                try
+                {
+                    conn.Open();
+                    string s1 = "SELECT * FROM outcommingInvoices";
+                    using (SqlCommand cmd1 = new SqlCommand(s1, conn))
+                    {
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd1))
+                        {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void fromDatePicker_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void toDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            
+                try
+                {
+                    conn.Open();
+                    string s = @"SELECT op.Product, op.Quantity, op.Price, op.Total FROM outcommingProducts op
+                            INNER JOIN outcommingInvoices oi ON op.invoiceNumber = oi.invoiceNumber 
+                            WHERE oi.Date BETWEEN @fromDate AND @toDate";
+                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@fromDate", fromDatePicker.Value);
+                        cmd.Parameters.AddWithValue("@toDate", toDateTimePicker.Value);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd)) {
+                            DataTable dt = new DataTable();
+                            adapter.Fill(dt);
+                            itemGrid.DataSource = dt;
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            
+        }
+
+        private void fromDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                string s = @"SELECT op.Product, op.Quantity, op.Price, op.Total FROM outcommingProducts op
+                            INNER JOIN outcommingInvoices oi ON op.invoiceNumber = oi.invoiceNumber 
+                            WHERE oi.Date BETWEEN @fromDate AND @toDate";
+                using (SqlCommand cmd = new SqlCommand(s, conn))
+                {
+                    cmd.Parameters.AddWithValue("@fromDate", fromDatePicker.Value);
+                    cmd.Parameters.AddWithValue("@toDate", toDateTimePicker.Value);
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        itemGrid.DataSource = dt;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
         }
     }
 }

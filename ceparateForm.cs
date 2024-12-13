@@ -12,6 +12,7 @@ using Microsoft.VisualBasic;
 using Microsoft.Data.SqlClient;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Management;
+using System.Data.Services;
 
 
 namespace Restaurant
@@ -22,6 +23,8 @@ namespace Restaurant
         string password;
         string selectedTable;
         DataTable table;
+        private DataServise dataServise = new DataServise();
+
 
         private string number() {
             Random random = new Random();
@@ -45,6 +48,7 @@ namespace Restaurant
 
         private void ceparateForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            dataServise.RefreshData(userNameLabel.Text);
             this.Hide();
             userForm userForm = new userForm(password);
         }
@@ -189,46 +193,48 @@ namespace Restaurant
         }
         private void RefreshListBox1()
         {
-            listBox1.Items.Clear();
+            try
+            {
+                DataTable updatedData = dataServise.GetUpdatedDataTable(selectedTable);
+
+                BindingSource bindingSource = new BindingSource
+                {
+                    DataSource = updatedData
+                };
+
+                listBox1.DataSource = bindingSource;
+                listBox1.DisplayMember = "Product"; 
+                listBox1.ValueMember = "Product";   
+
+                RemoveZeroQuantityRows(selectedTable);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing list: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RemoveZeroQuantityRows(string tableName)
+        {
             try
             {
                 conn.Open();
-                string query = "SELECT Product, Quantity, Price FROM Tables WHERE TableName = @TableName";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                string deleteQuery = "DELETE FROM Tables WHERE Quantity = 0 AND TableName = @TableName";
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
-                    cmd.Parameters.AddWithValue("@TableName", selectedTable);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            string product = reader["Product"].ToString();
-                            int quantity = Convert.ToInt32(reader["Quantity"]);
-                            double price = Convert.ToDouble(reader["Price"]);
-                            if (quantity > 0)
-                            {
-                                listBox1.Items.Add("Product: " + product + " - Quantity: " + quantity + " - Price: " + price + " - Total: " + price * quantity);
-                            }
-                            else
-                            {
-                                string s = "DELETE FROM TABLES WHERE Quantity = '0'";
-                                using (SqlCommand del = new SqlCommand(s, conn)) {
-                                    del.ExecuteNonQuery();
-                                }
-                                    listBox1.Items.Remove(listBox1.SelectedItem);
-                                
-                            }
-                        }
-                    }
+                    cmd.Parameters.AddWithValue("@TableName", tableName);
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error refreshing data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error removing zero-quantity rows: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 conn.Close();
             }
         }
+
     }
 }

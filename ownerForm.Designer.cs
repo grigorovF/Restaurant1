@@ -88,8 +88,8 @@
             outcommingGroup = new Guna.UI2.WinForms.Guna2GroupBox();
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            toDateTimePicker = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            fromDatePicker = new Guna.UI2.WinForms.Guna2DateTimePicker();
             tableLayoutPanel1 = new TableLayoutPanel();
             waiterLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -232,7 +232,7 @@
             incommingGroup.Margin = new Padding(3, 4, 3, 4);
             incommingGroup.Name = "incommingGroup";
             incommingGroup.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            incommingGroup.Size = new Size(303, 295);
+            incommingGroup.Size = new Size(303, 270);
             incommingGroup.TabIndex = 6;
             incommingGroup.Text = "Group by";
             // 
@@ -336,7 +336,7 @@
             addInvoice.FillColor = Color.AliceBlue;
             addInvoice.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             addInvoice.ForeColor = Color.Black;
-            addInvoice.Location = new Point(335, 837);
+            addInvoice.Location = new Point(335, 917);
             addInvoice.Margin = new Padding(3, 4, 3, 4);
             addInvoice.Name = "addInvoice";
             addInvoice.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -360,7 +360,7 @@
             backButton.FillColor = Color.AliceBlue;
             backButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             backButton.ForeColor = Color.Black;
-            backButton.Location = new Point(986, 837);
+            backButton.Location = new Point(986, 917);
             backButton.Margin = new Padding(3, 4, 3, 4);
             backButton.Name = "backButton";
             backButton.ShadowDecoration.CustomizableEdges = customizableEdges18;
@@ -384,7 +384,7 @@
             addUser.FillColor = Color.AliceBlue;
             addUser.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             addUser.ForeColor = Color.Black;
-            addUser.Location = new Point(335, 837);
+            addUser.Location = new Point(335, 917);
             addUser.Margin = new Padding(3, 4, 3, 4);
             addUser.Name = "addUser";
             addUser.ShadowDecoration.CustomizableEdges = customizableEdges20;
@@ -497,6 +497,7 @@
             dateCheck.UncheckedState.BorderThickness = 0;
             dateCheck.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
             dateCheck.UseVisualStyleBackColor = false;
+            dateCheck.CheckedChanged += dateCheck_CheckedChanged;
             // 
             // outcommingGroup
             // 
@@ -504,8 +505,8 @@
             outcommingGroup.BorderColor = Color.FromArgb(64, 64, 64);
             outcommingGroup.Controls.Add(guna2HtmlLabel4);
             outcommingGroup.Controls.Add(guna2HtmlLabel3);
-            outcommingGroup.Controls.Add(guna2DateTimePicker2);
-            outcommingGroup.Controls.Add(guna2DateTimePicker1);
+            outcommingGroup.Controls.Add(toDateTimePicker);
+            outcommingGroup.Controls.Add(fromDatePicker);
             outcommingGroup.Controls.Add(dateCheck);
             outcommingGroup.Controls.Add(waiterCombo);
             outcommingGroup.Controls.Add(outcommingInvoiceBox);
@@ -519,7 +520,7 @@
             outcommingGroup.Margin = new Padding(3, 4, 3, 4);
             outcommingGroup.Name = "outcommingGroup";
             outcommingGroup.ShadowDecoration.CustomizableEdges = customizableEdges30;
-            outcommingGroup.Size = new Size(303, 415);
+            outcommingGroup.Size = new Size(303, 400);
             outcommingGroup.TabIndex = 11;
             outcommingGroup.Text = "Group by";
             outcommingGroup.Visible = false;
@@ -547,39 +548,42 @@
             guna2HtmlLabel3.TabIndex = 13;
             guna2HtmlLabel3.Text = "from:";
             // 
-            // guna2DateTimePicker2
+            // toDateTimePicker
             // 
-            guna2DateTimePicker2.Checked = true;
-            guna2DateTimePicker2.CustomizableEdges = customizableEdges25;
-            guna2DateTimePicker2.Enabled = false;
-            guna2DateTimePicker2.FillColor = Color.WhiteSmoke;
-            guna2DateTimePicker2.Font = new Font("Segoe UI", 6.792453F, FontStyle.Bold);
-            guna2DateTimePicker2.Format = DateTimePickerFormat.Custom;
-            guna2DateTimePicker2.Location = new Point(157, 328);
-            guna2DateTimePicker2.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker2.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker2.Name = "guna2DateTimePicker2";
-            guna2DateTimePicker2.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2DateTimePicker2.Size = new Size(116, 40);
-            guna2DateTimePicker2.TabIndex = 12;
-            guna2DateTimePicker2.Value = new DateTime(2024, 12, 9, 15, 16, 14, 867);
+            toDateTimePicker.Checked = true;
+            toDateTimePicker.CustomizableEdges = customizableEdges25;
+            toDateTimePicker.Enabled = false;
+            toDateTimePicker.FillColor = Color.WhiteSmoke;
+            toDateTimePicker.Font = new Font("Segoe UI", 6.792453F, FontStyle.Bold);
+            toDateTimePicker.Format = DateTimePickerFormat.Custom;
+            toDateTimePicker.Location = new Point(157, 328);
+            toDateTimePicker.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            toDateTimePicker.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            toDateTimePicker.Name = "toDateTimePicker";
+            toDateTimePicker.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            toDateTimePicker.Size = new Size(116, 40);
+            toDateTimePicker.TabIndex = 12;
+            toDateTimePicker.Value = new DateTime(2024, 12, 9, 15, 16, 14, 867);
+            toDateTimePicker.ValueChanged += toDateTimePicker_ValueChanged;
             // 
-            // guna2DateTimePicker1
+            // fromDatePicker
             // 
-            guna2DateTimePicker1.Checked = true;
-            guna2DateTimePicker1.CustomizableEdges = customizableEdges27;
-            guna2DateTimePicker1.Enabled = false;
-            guna2DateTimePicker1.FillColor = Color.WhiteSmoke;
-            guna2DateTimePicker1.Font = new Font("Segoe UI", 6.792453F, FontStyle.Bold);
-            guna2DateTimePicker1.Format = DateTimePickerFormat.Custom;
-            guna2DateTimePicker1.Location = new Point(21, 328);
-            guna2DateTimePicker1.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
-            guna2DateTimePicker1.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
-            guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            guna2DateTimePicker1.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            guna2DateTimePicker1.Size = new Size(119, 40);
-            guna2DateTimePicker1.TabIndex = 6;
-            guna2DateTimePicker1.Value = new DateTime(2024, 12, 9, 15, 16, 46, 582);
+            fromDatePicker.Checked = true;
+            fromDatePicker.CustomizableEdges = customizableEdges27;
+            fromDatePicker.Enabled = false;
+            fromDatePicker.FillColor = Color.WhiteSmoke;
+            fromDatePicker.Font = new Font("Segoe UI", 6.792453F, FontStyle.Bold);
+            fromDatePicker.Format = DateTimePickerFormat.Custom;
+            fromDatePicker.Location = new Point(21, 328);
+            fromDatePicker.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            fromDatePicker.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            fromDatePicker.Name = "fromDatePicker";
+            fromDatePicker.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            fromDatePicker.Size = new Size(119, 40);
+            fromDatePicker.TabIndex = 6;
+            fromDatePicker.Value = new DateTime(2024, 12, 9, 15, 16, 46, 582);
+            fromDatePicker.ValueChanged += fromDatePicker_ValueChanged;
+            fromDatePicker.TextChanged += fromDatePicker_TextChanged;
             // 
             // tableLayoutPanel1
             // 
@@ -697,7 +701,7 @@
             itemGrid.RowHeadersVisible = false;
             itemGrid.RowHeadersWidth = 45;
             itemGrid.RowTemplate.Height = 27;
-            itemGrid.Size = new Size(861, 529);
+            itemGrid.Size = new Size(861, 604);
             itemGrid.TabIndex = 7;
             itemGrid.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             itemGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -735,10 +739,10 @@
             guna2Button1.ForeColor = Color.White;
             guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
             guna2Button1.ImageSize = new Size(36, 36);
-            guna2Button1.Location = new Point(1158, 233);
+            guna2Button1.Location = new Point(1146, 239);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            guna2Button1.Size = new Size(39, 36);
+            guna2Button1.Size = new Size(50, 40);
             guna2Button1.TabIndex = 14;
             // 
             // guna2Button2
@@ -754,10 +758,10 @@
             guna2Button2.Font = new Font("Segoe UI", 9F);
             guna2Button2.ForeColor = Color.White;
             guna2Button2.Image = Properties.Resources._31888db2a561c4b270f46ca550a4fbd4;
-            guna2Button2.Location = new Point(1127, 234);
+            guna2Button2.Location = new Point(1100, 239);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            guna2Button2.Size = new Size(39, 36);
+            guna2Button2.Size = new Size(40, 40);
             guna2Button2.TabIndex = 15;
             // 
             // ownerForm
@@ -765,7 +769,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
-            ClientSize = new Size(1209, 882);
+            ClientSize = new Size(1209, 989);
             Controls.Add(guna2Button2);
             Controls.Add(guna2Button1);
             Controls.Add(tableLayoutPanel2);
@@ -825,8 +829,8 @@
         private Guna.UI2.WinForms.Guna2ComboBox waiterCombo;
         private Guna.UI2.WinForms.Guna2CheckBox dateCheck;
         private Guna.UI2.WinForms.Guna2GroupBox outcommingGroup;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker2;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private Guna.UI2.WinForms.Guna2DateTimePicker toDateTimePicker;
+        private Guna.UI2.WinForms.Guna2DateTimePicker fromDatePicker;
         private TableLayoutPanel tableLayoutPanel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private TableLayoutPanel tableLayoutPanel2;
