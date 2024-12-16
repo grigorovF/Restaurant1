@@ -328,11 +328,13 @@ namespace Restaurant
             usersTab.Checked = true;
             if (usersTab.Checked)
             {
+                guna2Button2.Visible = true;
                 incommingTab.Checked = false;
                 outcommingTab.Checked = false;
                 addInvoice.Visible = false;
                 incommingGroup.Visible = false;
                 addUser.Visible = true;
+                
                 addInvoice.Visible = false;
                 try
                 {
@@ -408,6 +410,7 @@ namespace Restaurant
 
         private void outcommingTab_Click(object sender, EventArgs e)
         {
+            guna2Button2.Visible = true;
             outcommingTab.Checked = true;
             incommingTab.Checked = false;
             usersTab.Checked = false;
@@ -722,35 +725,36 @@ namespace Restaurant
 
         private void toDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            
-                try
-                {
-                    conn.Open();
-                    string s = @"SELECT op.Product, op.Quantity, op.Price, op.Total FROM outcommingProducts op
+
+            try
+            {
+                conn.Open();
+                string s = @"SELECT op.Product, op.Quantity, op.Price, op.Total FROM outcommingProducts op
                             INNER JOIN outcommingInvoices oi ON op.invoiceNumber = oi.invoiceNumber 
                             WHERE oi.Date BETWEEN @fromDate AND @toDate";
-                    using (SqlCommand cmd = new SqlCommand(s, conn))
+                using (SqlCommand cmd = new SqlCommand(s, conn))
+                {
+                    cmd.Parameters.AddWithValue("@fromDate", fromDatePicker.Value);
+                    cmd.Parameters.AddWithValue("@toDate", toDateTimePicker.Value);
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                     {
-                        cmd.Parameters.AddWithValue("@fromDate", fromDatePicker.Value);
-                        cmd.Parameters.AddWithValue("@toDate", toDateTimePicker.Value);
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd)) {
-                            DataTable dt = new DataTable();
-                            adapter.Fill(dt);
-                            itemGrid.DataSource = dt;
-                        }
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        itemGrid.DataSource = dt;
                     }
+                }
 
-                }
-                catch (Exception ex)
-                {
+            }
+            catch (Exception ex)
+            {
 
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    conn.Close();
-                }
-            
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
         }
 
         private void fromDatePicker_ValueChanged(object sender, EventArgs e)
@@ -784,6 +788,44 @@ namespace Restaurant
                 conn.Close();
             }
 
+        }
+
+      
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            if (usersTab.Checked == true) {
+                var input = MessageBox.Show("Do you realy want to delete this user?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (input == DialogResult.Yes)
+                {
+                    if (itemGrid.SelectedRows.Count > 0)
+                    {
+                        DataGridViewRow row = itemGrid.SelectedRows[0];
+                        string user = row.Cells[3].Value.ToString();
+
+                        try
+                        {
+                            conn.Open();
+                            string s = "DELETE FROM userTable WHERE userN = @userN";
+                            using (SqlCommand delete = new SqlCommand(s, conn))
+                            {
+                                delete.Parameters.AddWithValue("userN", user);
+                                delete.ExecuteNonQuery();
+                                MessageBox.Show("User is deleted", "Information", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            }
+                            itemGrid.Rows.Remove(row);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Please select user!", "Delete user", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        finally
+                        {
+                            conn.Close();
+                        }
+                    }
+                }
+
+            }
         }
     }
 }

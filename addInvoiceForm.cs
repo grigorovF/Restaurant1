@@ -98,7 +98,10 @@ namespace Restaurant
 
             y += panel.Height + 5;
 
-            parentPanel.VerticalScroll.Value = parentPanel.VerticalScroll.Maximum;
+            parentPanel.Height = y;
+
+            parentPanel.AutoScrollPosition = new Point(0, parentPanel.VerticalScroll.Maximum);
+
         }
 
         private void addInvoiceForm_Load(object sender, EventArgs e)

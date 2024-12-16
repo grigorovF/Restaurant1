@@ -340,7 +340,7 @@
             addInvoice.Margin = new Padding(3, 4, 3, 4);
             addInvoice.Name = "addInvoice";
             addInvoice.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            addInvoice.Size = new Size(210, 59);
+            addInvoice.Size = new Size(101, 59);
             addInvoice.TabIndex = 8;
             addInvoice.Text = "Add";
             addInvoice.Click += addInvoice_Click;
@@ -360,11 +360,11 @@
             backButton.FillColor = Color.AliceBlue;
             backButton.Font = new Font("Segoe UI", 10.8679247F, FontStyle.Bold);
             backButton.ForeColor = Color.Black;
-            backButton.Location = new Point(986, 917);
+            backButton.Location = new Point(1095, 917);
             backButton.Margin = new Padding(3, 4, 3, 4);
             backButton.Name = "backButton";
             backButton.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            backButton.Size = new Size(210, 59);
+            backButton.Size = new Size(101, 59);
             backButton.TabIndex = 9;
             backButton.Text = "Back";
             backButton.Click += backButton_Click;
@@ -388,7 +388,7 @@
             addUser.Margin = new Padding(3, 4, 3, 4);
             addUser.Name = "addUser";
             addUser.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            addUser.Size = new Size(210, 59);
+            addUser.Size = new Size(101, 59);
             addUser.TabIndex = 10;
             addUser.Text = "Add";
             addUser.Click += addUser_Click;
@@ -763,6 +763,8 @@
             guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges34;
             guna2Button2.Size = new Size(40, 40);
             guna2Button2.TabIndex = 15;
+            guna2Button2.Visible = false;
+            guna2Button2.Click += guna2Button2_Click;
             // 
             // ownerForm
             // 
